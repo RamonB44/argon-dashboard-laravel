@@ -1,5 +1,15 @@
+@php
+    $mantenimientos = ['gerencia.index', 'sedes.index', 'area.index', 'funcion.index', 'procesos.index'];
+    $sub_mantenimientos = ['areas.gestion', 'funcion.destajo.index'];
+    $gestion_usuarios = ['users.index', 'groups.index'];
+    $auxiliares = ['treg.index', 'offday.index'];
+    $gestion_employes = ['employes.index','manageprocess.index'];
+    $gestion_attendances = [];
+    $gestion_reports = [];
+@endphp
+
 <aside class="sidenav bg-white navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-4 "
-    id="sidenav-main">
+    id="sidenav-main" style="z-index: auto;">
     <div class="sidenav-header">
         <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none"
             aria-hidden="true" id="iconSidenav"></i>
@@ -12,8 +22,8 @@
     <div class="collapse navbar-collapse  w-auto " id="sidenav-collapse-main">
         <ul class="navbar-nav">
             <li class="nav-item">
-                <a class="nav-link {{ Route::currentRouteName() == 'home' ? 'active' : '' }}"
-                    href="{{ route('home') }}">
+                <a class="nav-link {{ Route::currentRouteName() == 'home' ? 'active' : '' }}" href="{{ route('home') }}"
+                    target="_blank">
                     <div
                         class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="ni ni-tv-2 text-primary text-sm opacity-10"></i>
@@ -21,155 +31,258 @@
                     <span class="nav-link-text ms-1">Dashboard</span>
                 </a>
             </li>
-            <li class="nav-item mt-3 d-flex align-items-center">
-                <div class="ps-4">
-                    <i class="fa-solid fa-screwdriver-wrench" style="color: #f4645f;"></i>
-
+            <li class="nav-item">
+                <a class="nav-link {{ in_array(Route::currentRouteName(), array_merge($mantenimientos, $sub_mantenimientos, $auxiliares), true) ? 'active' : '' }} collapsed"
+                    aria-controls="manteManagement" data-bs-toggle="collapse"
+                    aria-expanded="{{ in_array(Route::currentRouteName(), array_merge($mantenimientos, $sub_mantenimientos, $auxiliares), true) ? 'true' : 'false' }}"
+                    role="button" href="#manteManagement" target="_blank">
+                    <span class="sidenav-mini-icon"> M </span>
+                    <span class="sidenav-normal"> Mantenimiento <b class="caret"></b></span>
+                </a>
+                <div class="collapse {{ in_array(Route::currentRouteName(), array_merge($mantenimientos, $sub_mantenimientos, $auxiliares), true) ? 'show' : '' }}"
+                    id="manteManagement">
+                    <ul class="nav nav-sm flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link {{ Route::currentRouteName() == 'gerencia.index' ? 'active' : '' }}"
+                                href="{{ route('gerencia.index') }}">
+                                <div
+                                    class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                                    <i class="ni ni-single-02 text-dark text-sm opacity-10"></i>
+                                </div>
+                                <span class="nav-link-text ms-1"> Gerencia </span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link {{ Route::currentRouteName() == 'sedes.index' ? 'active' : '' }}"
+                                href="{{ route('sedes.index') }}">
+                                <div
+                                    class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                                    <i class="ni ni-single-02 text-dark text-sm opacity-10"></i>
+                                </div>
+                                <span class="nav-link-text ms-1"> Sedes </span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link {{ Route::currentRouteName() == 'procesos.index' ? 'active' : '' }}"
+                                href="{{ route('procesos.index') }}">
+                                <div
+                                    class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                                    <i class="ni ni-single-02 text-dark text-sm opacity-10"></i>
+                                </div>
+                                <span class="nav-link-text ms-1"> Cultivo </span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link {{ in_array(Route::currentRouteName(), array_merge(['area.index', 'funcion.index'], $sub_mantenimientos), true) ? 'active' : '' }} collapsed"
+                                aria-controls="areasManagement" data-bs-toggle="collapse"
+                                aria-expanded="{{ in_array(Route::currentRouteName(), array_merge(['area.index', 'funcion.index'], $sub_mantenimientos), true) ? 'true' : 'false' }}"
+                                role="button" href="#areasManagement">
+                                <span class="sidenav-mini-icon"> AM </span>
+                                <span class="sidenav-normal"> Gestion de Areas y Funciones <b class="caret"></b></span>
+                            </a>
+                            <div class="collapse {{ in_array(Route::currentRouteName(), array_merge(['area.index', 'funcion.index'], $sub_mantenimientos), true) ? 'show' : '' }}"
+                                id="areasManagement">
+                                <ul class="nav nav-sm flex-column">
+                                    <li class="nav-item">
+                                        <a class="nav-link {{ Route::currentRouteName() == 'areas.gestion' ? 'active' : '' }}"
+                                            href="{{ route('areas.gestion') }}">
+                                            <div
+                                                class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                                                <i class="ni ni-single-02 text-dark text-sm opacity-10"></i>
+                                            </div>
+                                            <span class="nav-link-text ms-1"> Areas </span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link {{ Route::currentRouteName() == 'area.index' ? 'active' : '' }}"
+                                            href="{{ route('area.index') }}">
+                                            <div
+                                                class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                                                <i class="ni ni-single-02 text-dark text-sm opacity-10"></i>
+                                            </div>
+                                            <span class="nav-link-text ms-1"> Areas por Proceso </span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link {{ Route::currentRouteName() == 'funcion.destajo.index' ? 'active' : '' }}"
+                                            href="{{ route('funcion.destajo.index') }}">
+                                            <div
+                                                class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                                                <i class="ni ni-single-02 text-dark text-sm opacity-10"></i>
+                                            </div>
+                                            <span class="nav-link-text ms-1"> Funciones </span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link {{ Route::currentRouteName() == 'funcion.index' ? 'active' : '' }}"
+                                            href="{{ route('funcion.index') }}">
+                                            <div
+                                                class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                                                <i class="ni ni-single-02 text-dark text-sm opacity-10"></i>
+                                            </div>
+                                            <span class="nav-link-text ms-1"> Funciones por Area </span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link {{ in_array(Route::currentRouteName(), $auxiliares, true) ? 'active' : '' }} collapsed"
+                                aria-controls="auxiManagement" data-bs-toggle="collapse"
+                                aria-expanded="{{ in_array(Route::currentRouteName(), $auxiliares, true) ? 'true' : 'false' }}"
+                                role="button" href="#auxiManagement">
+                                <span class="sidenav-mini-icon"> A </span>
+                                <span class="sidenav-normal"> Auxiliares <b class="caret"></b></span>
+                            </a>
+                            <div class="collapse {{ in_array(Route::currentRouteName(), $auxiliares, true) ? 'show' : '' }}"
+                                id="auxiManagement">
+                                <ul class="nav nav-sm flex-column">
+                                    <li class="nav-item">
+                                        <a class="nav-link {{ Route::currentRouteName() == 'treg.index' ? 'active' : '' }}"
+                                            href="{{ route('treg.index') }}">
+                                            <div
+                                                class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                                                <i class="ni ni-single-02 text-dark text-sm opacity-10"></i>
+                                            </div>
+                                            <span class="nav-link-text ms-1"> Tipo de Registro </span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link {{ Route::currentRouteName() == 'offday.index' ? 'active' : '' }}"
+                                            href="{{ route('offday.index') }}">
+                                            <div
+                                                class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                                                <i class="ni ni-single-02 text-dark text-sm opacity-10"></i>
+                                            </div>
+                                            <span class="nav-link-text ms-1"> Feriados </span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
                 </div>
-                <h6 class="ms-2 text-uppercase text-xs font-weight-bolder opacity-6 mb-0">Mantenimientos</h6>
-            </li>
-            <li class="nav-item mt-3 d-flex align-items-center">
-                <div class="ps-4">
-                    <i class="fa-solid fa-screwdriver-wrench" style="color: #f4645f;"></i>
-
-                </div>
-                <h6 class="ms-2 text-uppercase text-xs font-weight-bolder opacity-6 mb-0">Configuraciones</h6>
-            </li>
-            <li class="nav-item mt-3 d-flex align-items-center">
-                <div class="ps-4">
-                    <i class="fa-solid fa-screwdriver-wrench" style="color: #f4645f;"></i>
-
-                </div>
-                <h6 class="ms-2 text-uppercase text-xs font-weight-bolder opacity-6 mb-0">Usuarios</h6>
             </li>
             <li class="nav-item">
-                <a class="nav-link {{ in_array(Route::currentRouteName(), ['users.index','groups.index'], true) ? 'active' : '' }} collapsed"
-                    aria-controls="userManagement" data-bs-toggle="collapse"
-                    aria-expanded="{{ in_array(Route::currentRouteName(), ['users.index','groups.index'], true) ? 'true' : 'false' }}"
-                    role="button" href="#userManagement">
-                    <span class="sidenav-mini-icon"> P </span>
-                    <span class="sidenav-normal"> Profile <b class="caret"></b></span>
-                    <div class="collapse {{ in_array(Route::currentRouteName(), ['users.index','groups.index'], true) ? 'show' : '' }}"
-                        id="userManagement" style="">
-                        <ul class="nav nav-sm flex-column">
-                            <li class="nav-item">
-                                <a class="nav-link active"
-                                    href="{{ route('users.index') }}">
-                                    <div
-                                        class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                                        <i class="ni ni-single-02 text-dark text-sm opacity-10"></i>
-                                    </div>
-                                    <span class="nav-link-text ms-1"> Usuarios </span>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link "
-                                    href="{{ route('groups.index') }}">
-                                    <div
-                                        class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                                        <i class="ni ni-single-02 text-dark text-sm opacity-10"></i>
-                                    </div>
-                                    <span class="nav-link-text ms-1"> Permisos </span>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
+                <a class="nav-link {{ in_array(Route::currentRouteName(), array_merge($gestion_employes), true) ? 'active' : '' }} collapsed"
+                    aria-controls="employeManagement" data-bs-toggle="collapse"
+                    aria-expanded="{{ in_array(Route::currentRouteName(), array_merge($gestion_employes), true) ? 'true' : 'false' }}"
+                    role="button" href="#employeManagement" target="_blank">
+                    <span class="sidenav-mini-icon"> M </span>
+                    <span class="sidenav-normal"> Gestion de Trabajadores <b class="caret"></b></span>
                 </a>
+                <div class="collapse {{ in_array(Route::currentRouteName(), array_merge($gestion_employes), true) ? 'show' : '' }}"
+                    id="employeManagement">
+                    <ul class="nav nav-sm flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link {{ Route::currentRouteName() == 'employes.index' ? 'active' : '' }}"
+                                href="{{ route('employes.index') }}">
+                                <div
+                                    class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                                    <i class="ni ni-single-02 text-dark text-sm opacity-10"></i>
+                                </div>
+                                <span class="nav-link-text ms-1"> Trabajadores </span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link {{ Route::currentRouteName() == 'manageprocess.index' ? 'active' : '' }}"
+                                href="{{ route('manageprocess.index') }}">
+                                <div
+                                    class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                                    <i class="ni ni-single-02 text-dark text-sm opacity-10"></i>
+                                </div>
+                                <span class="nav-link-text ms-1"> Cambios de Personal </span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
             </li>
+            <li class="nav-item">
+                <a class="nav-link {{ in_array(Route::currentRouteName(), array_merge($gestion_attendances), true) ? 'active' : '' }} collapsed"
+                    aria-controls="asistenciaManagement" data-bs-toggle="collapse"
+                    aria-expanded="{{ in_array(Route::currentRouteName(), array_merge($gestion_attendances), true) ? 'true' : 'false' }}"
+                    role="button" href="#asistenciaManagement" target="_blank">
+                    <span class="sidenav-mini-icon"> A </span>
+                    <span class="sidenav-normal"> Gestion de Asistencia <b class="caret"></b></span>
+                </a>
+                <div class="collapse {{ in_array(Route::currentRouteName(), array_merge($gestion_attendances), true) ? 'show' : '' }}"
+                    id="asistenciaManagement">
+                </div>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link {{ in_array(Route::currentRouteName(), array_merge($gestion_reports), true) ? 'active' : '' }} collapsed"
+                    aria-controls="reportManagement" data-bs-toggle="collapse"
+                    aria-expanded="{{ in_array(Route::currentRouteName(), array_merge($gestion_reports), true) ? 'true' : 'false' }}"
+                    role="button" href="#reportManagement" target="_blank">
+                    <span class="sidenav-mini-icon"> A </span>
+                    <span class="sidenav-normal"> Gestion de Reportes <b class="caret"></b></span>
+                </a>
+                <div class="collapse {{ in_array(Route::currentRouteName(), array_merge($gestion_reports), true) ? 'show' : '' }}"
+                    id="reportManagement">
+                </div>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link {{ in_array(Route::currentRouteName(), $gestion_usuarios, true) ? 'active' : '' }} collapsed"
+                    aria-controls="userManagement" data-bs-toggle="collapse"
+                    aria-expanded="{{ in_array(Route::currentRouteName(), $gestion_usuarios, true) ? 'true' : 'false' }}"
+                    role="button" href="#userManagement">
+                    <span class="sidenav-mini-icon"> UM </span>
+                    <span class="sidenav-normal"> Gestion de Usuarios <b class="caret"></b></span>
+                </a>
+                <div class="collapse {{ in_array(Route::currentRouteName(), $gestion_usuarios, true) ? 'show' : '' }}"
+                    id="userManagement">
+                    <ul class="nav nav-sm flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link {{ Route::currentRouteName() == 'users.index' ? 'active' : '' }}"
+                                href="{{ route('users.index') }}">
+                                <div
+                                    class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                                    <i class="ni ni-single-02 text-dark text-sm opacity-10"></i>
+                                </div>
+                                <span class="nav-link-text ms-1"> Usuarios </span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link {{ Route::currentRouteName() == 'groups.index' ? 'active' : '' }}"
+                                href="{{ route('groups.index') }}">
+                                <div
+                                    class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                                    <i class="ni ni-single-02 text-dark text-sm opacity-10"></i>
+                                </div>
+                                <span class="nav-link-text ms-1"> Permisos </span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+        </ul>
+        <hr class="horizontal dark mt-0">
+        <ul class="navbar-nav">
             <li class="nav-item">
                 <a class="nav-link {{ Route::currentRouteName() == 'users.profile' ? 'active' : '' }}"
                     href="{{ route('users.profile') }}">
                     <div
                         class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="ni ni-single-02 text-dark text-sm opacity-10"></i>
+                        <i class="ni ni-tv-2 text-primary text-sm opacity-10"></i>
                     </div>
-                    <span class="nav-link-text ms-1"> Perfil </span>
+                    <span class="nav-link-text ms-1">Perfil</span>
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link {{ str_contains(request()->url(), 'users/config') == true ? 'active' : '' }}"
+                <a class="nav-link {{ Route::currentRouteName() == 'users.config' ? 'active' : '' }}"
                     href="{{ route('users.config') }}">
                     <div
                         class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="ni ni-bullet-list-67 text-dark text-sm opacity-10"></i>
+                        <i class="ni ni-tv-2 text-primary text-sm opacity-10"></i>
                     </div>
-                    <span class="nav-link-text ms-1"> Configuraciones </span>
+                    <span class="nav-link-text ms-1">Configuraciones</span>
                 </a>
             </li>
-            {{--
-            <li class="nav-item mt-3">
-                <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Pages</h6>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link {{ str_contains(request()->url(), 'tables') == true ? 'active' : '' }}" href="{{ route('page', ['page' => 'tables']) }}">
-                    <div
-                        class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="ni ni-calendar-grid-58 text-warning text-sm opacity-10"></i>
-                    </div>
-                    <span class="nav-link-text ms-1">Tables</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link {{  str_contains(request()->url(), 'billing') == true ? 'active' : '' }}" href="{{ route('page', ['page' => 'billing']) }}">
-                    <div
-                        class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="ni ni-credit-card text-success text-sm opacity-10"></i>
-                    </div>
-                    <span class="nav-link-text ms-1">Billing</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link {{ Route::currentRouteName() == 'virtual-reality' ? 'active' : '' }}" href="{{ route('virtual-reality') }}">
-                    <div
-                        class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="ni ni-app text-info text-sm opacity-10"></i>
-                    </div>
-                    <span class="nav-link-text ms-1">Virtual Reality</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link {{ Route::currentRouteName() == 'rtl' ? 'active' : '' }}" href="{{ route('rtl') }}">
-                    <div
-                        class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="ni ni-world-2 text-danger text-sm opacity-10"></i>
-                    </div>
-                    <span class="nav-link-text ms-1">RTL</span>
-                </a>
-            </li>
-            <li class="nav-item mt-3">
-                <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Account pages</h6>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link {{ Route::currentRouteName() == 'profile-static' ? 'active' : '' }}" href="{{ route('profile-static') }}">
-                    <div
-                        class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="ni ni-single-02 text-dark text-sm opacity-10"></i>
-                    </div>
-                    <span class="nav-link-text ms-1">Profile</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link " href="{{ route('sign-in-static') }}">
-                    <div
-                        class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="ni ni-single-copy-04 text-warning text-sm opacity-10"></i>
-                    </div>
-                    <span class="nav-link-text ms-1">Sign In</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link " href="{{ route('sign-up-static') }}">
-                    <div
-                        class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="ni ni-collection text-info text-sm opacity-10"></i>
-                    </div>
-                    <span class="nav-link-text ms-1">Sign Up</span>
-                </a>
-            </li> --}}
         </ul>
     </div>
-    {{-- <div class="sidenav-footer mx-3 ">
-        <div class="card card-plain shadow-none" id="sidenavCard">
+    <div class="sidenav-footer mx-3 ">
+        {{-- <div class="card card-plain shadow-none" id="sidenavCard">
             <img class="w-50 mx-auto" src="/img/illustrations/icon-documentation-warning.svg"
                 alt="sidebar_illustration">
             <div class="card-body text-center p-3 w-100 pt-0">
@@ -182,6 +295,8 @@
         <a href="/docs/bootstrap/overview/argon-dashboard/index.html" target="_blank"
             class="btn btn-dark btn-sm w-100 mb-3">Documentation</a>
         <a class="btn btn-primary btn-sm mb-0 w-100"
-            href="https://www.creative-tim.com/product/argon-dashboard-pro-laravel" target="_blank" type="button">Upgrade to PRO</a>
-    </div> --}}
+            href="https://www.creative-tim.com/product/argon-dashboard-pro-laravel" target="_blank"
+            type="button">Upgrade to PRO</a> --}}
+    </div>
 </aside>
+
