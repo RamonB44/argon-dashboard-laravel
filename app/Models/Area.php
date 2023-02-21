@@ -12,11 +12,11 @@ class Area extends Model
 
     public function gerencia()
     {
-        return $this->belongsTo('App\Gerencia', 'id_gerencia');
+        return $this->belongsTo('App\Models\Gerencia', 'id_gerencia');
     }
 
     public function areas_sedes()
     {
-        return $this->belongsToMany('App\Sedes', 'areas_sedes', 'id_area', 'id_sede')->withPivot(['id','c_costo','id_proceso']);
+        return $this->belongsToMany('App\Models\Sedes', 'areas_sedes', 'id_area', 'id_sede')->withPivot(['id','c_costo','id_proceso']);
     }
 }
