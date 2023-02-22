@@ -133,7 +133,7 @@
                     </div><!-- /.modal-content -->
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-primary">Guardar</button>
-                        <a type="button" class="btn btn-default" id="btnclosemodal" data-dismiss="modal">Cerrar</a>
+                        <a type="button" class="btn bg-gradient-secondary" data-bs-dismiss="modal"">Cerrar</a>
                     </div>
                 </form>
             </div>

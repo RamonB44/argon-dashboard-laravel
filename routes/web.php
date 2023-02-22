@@ -1,8 +1,5 @@
 <?php
 
-use App\Http\Controllers\AreaController;
-use App\Http\Controllers\Auxliliar\DiasFeriadosController;
-use App\Http\Controllers\Auxliliar\TipoRegistroController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -35,7 +32,11 @@ use App\Http\Controllers\ManageProcessController;
 use App\Http\Controllers\ProcesosController;
 use App\Http\Controllers\SedesController;
 use App\Http\Controllers\UsersController;
-
+use App\Http\Controllers\AreaController;
+use App\Http\Controllers\Auxliliar\DiasFeriadosController;
+use App\Http\Controllers\Auxliliar\TipoRegistroController;
+use App\Http\Controllers\ManageAssistanceController;
+use App\Http\Controllers\ReportsController;
 
 Route::get('/', function () {
     return redirect('/dashboard');
@@ -77,7 +78,6 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/config',   'config')->name('users.config');
         Route::post('/config', 'config')->name('users.config');
     });
-
 
     Route::controller(GroupController::class)->prefix('groups')->group(function () {
         Route::get('/index', 'index')->name('groups.index');
@@ -129,7 +129,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/getTable/{id_sede}/{id_proceso}', 'getTable')->name('area.getTable3');
         Route::get('/create', 'create')->name('area.create');
         Route::post('/create', 'create')->name('area.create');
-        // Route::get('/update/{id}', 'AreaController@update')->name('area.update');
+        // Route::get('/update/{id}', 'update')->name('area.update');
         Route::get('/update/{id}/{id_sede}', 'update')->name('area.update');
         Route::get('/update/{id}/{id_sede}/{id_proceso}', 'update')->name('area.update');
         Route::post('/update/{id}', 'update')->name('area.update');
@@ -151,7 +151,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('/gestion/update/{id}', 'gestionUpdate')->name('areas.gestion.update');
         Route::get('/gestion/delete/{id}', 'gestionDelete')->name('areas.gestion.delete');
 
-        Route::post('/getFunctions', 'AreaController@getFunctions')->name('areas.getFunctions');
+        Route::post('/getFunctions', 'getFunctions')->name('areas.getFunctions');
     });
 
     Route::controller(FuncionController::class)->prefix('funcion')->group(function () {
@@ -166,7 +166,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/loadByArea/{id_area}/{id_sede}/{id_proceso}', 'loadByArea')->name('funcion.loadByArea');
         Route::get('/getData/{id_area}', 'loadByArea')->name('funcion.getData');
         // Route::get('/getData/{id_funcion}','FuncionController@loadByArea')->name('')
-        Route::prefix('gestion')->group(function () {
+        Route::controller(FuncionController::class)->prefix('gestion')->group(function () {
             Route::get('/index', function () {
                 return view('funcion.gestion.index');
             })->name('funcion.destajo.index');
@@ -180,16 +180,16 @@ Route::group(['middleware' => 'auth'], function () {
     });
 
     Route::prefix('auxiliar')->group(function () {
-        Route::controller(TipoRegistroController::class)->prefix('treg')->group(function () {
+        Route::controller(TipoRegistroController::class)->prefix('auxiliar/treg')->group(function () {
             Route::get('/index', 'index')->name('treg.index');
             Route::get('/getTable', 'getTable')->name('treg.getTable');
             Route::get('/create', 'create')->name('treg.create');
             Route::post('/create', 'create')->name('treg.create');
-            Route::get('/update/{id}', '@update')->name('treg.update');
+            Route::get('/update/{id}', 'update')->name('treg.update');
             Route::post('/update/{id}', 'update')->name('treg.update');
             Route::get('/delete/{id}', 'delete')->name('treg.delete');
         });
-        Route::controller(DiasFeriadosController::class)->prefix('offday')->group(function () {
+        Route::controller(DiasFeriadosController::class)->prefix('auxiliar/offday')->group(function () {
             Route::get('/index', 'index')->name('offday.index');
             Route::get('/getTable', 'getTable')->name('offday.getTable');
             Route::get('/create', 'create')->name('offday.create');
@@ -226,8 +226,8 @@ Route::group(['middleware' => 'auth'], function () {
             Route::get('/getregister/{code}', 'getregister')->name('manageprocess.getregister');
             // Route::get('/massive','ManageProcessController@massive')->name('manageprocess.massive');
             Route::post('/massiveregister', 'massiveReg')->name('manageprocess.massiveReg');
-            Route::post('/massivechange','changeMasive')->name('manageprocess.changeMasive');
-            Route::post('/import','importProcess')->name('manageprocess.import');
+            Route::post('/massivechange', 'changeMasive')->name('manageprocess.changeMasive');
+            Route::post('/import', 'importProcess')->name('manageprocess.import');
         });
 
         Route::prefix('reportes')->group(function () {
@@ -235,5 +235,80 @@ Route::group(['middleware' => 'auth'], function () {
         });
     });
 
+    Route::controller(ManageAssistanceController::class)->prefix('manageassistance')->group(function () {
+        Route::get('/index', 'index')->name('manageAssist.index');
+        Route::get('/searchEmploye/{code}', 'search')->name('manageAssist.search');
 
+        Route::post('/register/{id}', 'register')->name('manageAssist.register'); //deprecated
+
+        Route::post('/regassistance/{id}', 'reg_assistance')->name('manageAssist.register.assistance');
+
+        Route::post('/regpermission/{id}', 'reg_permission')->name('manageAssist.register.permission');
+
+        Route::post('/reglicence/{id}', 'reg_licence')->name('manageAssist.register.licence');
+
+        Route::post('/regvacation/{id}', 'reg_vacation')->name('manageAssist.register.vacation');
+
+        Route::post('/regcese/{id}', 'reg_cese')->name('manageAssist.register.cese');
+
+        Route::post('/remove/{id}', 'remove')->name('manageAssist.remove');
+
+        Route::get('/editRegister/{id_register}', 'editRegister')->name('manageAssist.editRegister');
+        Route::post('/editRegister/{id_register}', 'editRegister')->name('manageAssist.editRegister');
+        Route::post('/editValidacion/{id_register}', 'editValidacion')->name('manageAssist.editValidacion');
+        Route::get('/getregister/{code}', 'getregister')->name('manageAssist.getregister');
+
+        Route::get('/delete/{id}', 'delete')->name('manageAssist.delete');
+
+        //massive
+        Route::get('/massive', 'massive')->name('manageAssist.massive');
+        Route::post('/massiveregister', 'massiveReg')->name('manageAssist.massiveReg');
+    });
+
+    Route::controller(AsistenciaController::class)->prefix('assistance')->group(function () {
+        Route::get('/week_Dates/{week_number}', function ($week_number) {
+            return view('assistance.dates', compact('week_number'))->render();
+        })->name('assistance.week_number');
+
+        Route::get('/register/{code}', 'create')->name('assistance.register');
+
+        Route::get('/reportes', 'reportes')->name('assistance.reportes');
+
+        Route::get('/manage', 'manage')->name('assistance.manage');
+
+        Route::post('/searchByEmploye', 'search')->name('assistance.search');
+
+        Route::post('/newsearch', 'search_new')->name('assistance.newsearch');
+
+        Route::post('/import_marcas', 'import_marcas')->name('assistance.import_marcas');
+
+        Route::get('/loadlistworker/{date}/{id_user}/{tipo}/{sede}', 'loadlistworker')->name('assistance.loadworkers');
+        Route::get('/loadlistworker/{date}/{id_user}/{tipo}/{sede}/{time}', 'loadlistworker')->name('assistance.loadworkers');
+        Route::get('loadUsers/{date}/{id_sede}/{id_proceso}', 'loadUsers')->name('assistance.loadUsers');
+    });
+
+    Route::controller(ReportsController::class)->prefix('report')->group(function(){
+
+        Route::prefix('produccion')->group(function(){
+            Route::get('/index','showProduccion')->name('report.produccion');
+        });
+
+        Route::prefix('recursos')->group(function(){
+            Route::get('/index','showRecursos')->name('report.recursos');
+        });
+
+    });
+
+    Route::controller(ExcelController::class)->prefix('xlsx')->group(function () {
+        //asisstance and javas and order
+        Route::get('/orden/getxlsxtoday', 'getXlsx')->name('xlsx.getData');
+        Route::post('/javas/getxlsxtoday', 'getXlsxJavas')->name('xlsx.getJavasXlsx');
+        Route::post('/assistance/getxlsx', 'getXlsxAssistance')->name('xlsx.getAssisXlsx');
+
+        Route::post('/assistance/getxlsxRRHH', 'getXlsxAssistanceRRHH')->name('xlsx.getAssisXlsxRRHH');
+
+        //employes
+        Route::post('/employe/getxlsx', 'getXlsxEmploye')->name('xlsx.getEmployeXlsx');
+        Route::post('/employeprocess/getxlsx', 'getXlsxEmployeProcess')->name('xlsx.getEmployesProcessXlsx');
+    });
 });

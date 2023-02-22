@@ -223,7 +223,7 @@
     </div><!-- /.modal -->
 
     <div class="modal fade" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" id="editModal">
-        <div class="modal-dialog modal-xl" role="document">
+        <div class="modal-dialog modal-fullscreen" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span

@@ -4,8 +4,8 @@
     $gestion_usuarios = ['users.index', 'groups.index'];
     $auxiliares = ['treg.index', 'offday.index'];
     $gestion_employes = ['employes.index','manageprocess.index'];
-    $gestion_attendances = [];
-    $gestion_reports = [];
+    $gestion_attendances = ['manageAssist.index','manageAssist.massive'];
+    $gestion_reports = ['report.recursos'];
 @endphp
 
 <aside class="sidenav bg-white navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-4 "
@@ -207,6 +207,29 @@
                 </a>
                 <div class="collapse {{ in_array(Route::currentRouteName(), array_merge($gestion_attendances), true) ? 'show' : '' }}"
                     id="asistenciaManagement">
+                    <ul class="nav nav-sm flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link {{ Route::currentRouteName() == 'manageAssist.index' ? 'active' : '' }}"
+                                href="{{ route('manageAssist.index') }}">
+                                <div
+                                    class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                                    <i class="ni ni-single-02 text-dark text-sm opacity-10"></i>
+                                </div>
+                                <span class="nav-link-text ms-1"> Asistencias </span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link {{ Route::currentRouteName() == 'manageAssist.massive' ? 'active' : '' }}"
+                                href="{{ route('manageAssist.massive') }}">
+                                <div
+                                    class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                                    <i class="ni ni-single-02 text-dark text-sm opacity-10"></i>
+                                </div>
+                                <span class="nav-link-text ms-1"> Asistencia Masiva </span>
+                            </a>
+                        </li>
+
+                    </ul>
                 </div>
             </li>
             <li class="nav-item">
@@ -219,6 +242,19 @@
                 </a>
                 <div class="collapse {{ in_array(Route::currentRouteName(), array_merge($gestion_reports), true) ? 'show' : '' }}"
                     id="reportManagement">
+                    <ul class="nav nav-sm flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link {{ Route::currentRouteName() == 'report.recursos' ? 'active' : '' }}"
+                                href="{{ route('report.recursos') }}">
+                                <div
+                                    class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                                    <i class="ni ni-single-02 text-dark text-sm opacity-10"></i>
+                                </div>
+                                <span class="nav-link-text ms-1"> Recursos Humanos </span>
+                            </a>
+                        </li>
+
+                    </ul>
                 </div>
             </li>
 
