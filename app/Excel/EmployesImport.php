@@ -4,13 +4,13 @@ namespace App\Excel;
 
 // use Illuminate\Database\Eloquent\Model;
 
-use App\Area;
-use App\Employes;
-use App\EmployesType;
-use App\Funcion;
-use App\Gerencia;
-use App\Procesos;
-use App\Sedes;
+use App\Models\Area;
+use App\Models\Employes;
+use App\Models\EmployesType;
+use App\Models\Funcion;
+use App\Models\Gerencia;
+use App\Models\Procesos;
+use App\Models\Sedes;
 // use Illuminate\Support\Facades\DB;
 use DB;
 use Illuminate\Validation\Rule;
@@ -51,7 +51,7 @@ class EmployesImport implements ToModel,WithChunkReading,SkipsOnError,SkipsOnFai
             $c_costo = [$row['c_costo']];
             DB::table('areas_sedes')->insert(['id_sede'=>$sede->id,'id_area'=>$area->id,'id_proceso'=>$proceso->id,'c_costo'=>json_encode($c_costo)]);
         }else{
-            
+
             $c_costo = json_decode($costo[0]->c_costo);
             $x = true;
             // dd($c_costo
@@ -59,12 +59,12 @@ class EmployesImport implements ToModel,WithChunkReading,SkipsOnError,SkipsOnFai
                 $c_costo[] = $row["c_costo"];
                 $x = false;
             }
-            
+
             $exist = array_search($row['c_costo'],$c_costo);
-            
+
             if($exist === false){
                 // dd($exist);
-                //if not exist then 
+                //if not exist then
                 // dd($row['c_costo']);
                 if($x){
                     $c_costo[] = $row['c_costo'];
@@ -73,7 +73,7 @@ class EmployesImport implements ToModel,WithChunkReading,SkipsOnError,SkipsOnFai
                 // $costo->save();
                 DB::table('areas_sedes')->where('id_sede',$sede->id)->where('id_area',$area->id)->where('id_proceso',$proceso->id)->update(['c_costo'=>json_encode($c_costo)]);
             }
-            
+
         }
         //dd($row);
         //Employes::withTrashed()->find($row["codigo"])->restore();

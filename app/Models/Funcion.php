@@ -13,6 +13,6 @@ class Funcion extends Model
 
     public function areas()
     {
-        return $this->belongsTo('App\Area', 'id_area');
+        return $this->belongsTo('App\Models\Area', 'id_area');
     }
 }

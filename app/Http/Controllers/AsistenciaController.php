@@ -703,8 +703,8 @@ class AsistenciaController extends Controller
         DB::raw('SUM(case when reg_assistance.id_aux_treg = 1 then 1 else 0 end) as T_ASISTENCIA'),
         DB::raw('SUM(case when reg_assistance.id_aux_treg = 3 then 1 else 0 end) as T_PERMISO'),
         DB::raw('SUM(case when reg_assistance.id_aux_treg = 10 then 1 else 0 end) as T_FALTA'),
-        )->groupBy('reg_assistance.id_employe')->get()
-        ->toArray();
+        )->groupBy('reg_assistance.id_employe','employes.id','employes_type.description','employes.dir_ind','employes.doc_num',
+        'employes.fullname')->get()->toArray();
         // dd($headings);
         return view('reports.fragments.table-body',compact('sub','headings'))->render();
     }

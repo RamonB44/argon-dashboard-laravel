@@ -129,7 +129,7 @@
 @endsection
 
 @section('css')
-    <link href="{{ asset('assets/DataTables/datatables.min.css') }}" />
+    <link href="{{ asset('assets/DataTables/datatables.min.css') }}" rel="stylesheet"/>
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
 @endsection
 

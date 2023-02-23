@@ -91,7 +91,7 @@
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-primary">Guardar</button>
                 </form>
-                <button type="button" class="btn btn-default" id="btnclosemodal" data-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn bg-gradient-secondary" data-bs-dismiss="modal">Cerrar</button>
             </div>
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
@@ -149,7 +149,7 @@
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-primary" id="btnSend">Guardar</button>
                 </form>
-                <button type="button" class="btn btn-default" id="btnclosemodal" data-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn bg-gradient-secondary" data-bs-dismiss="modal">Cerrar</button>
             </div>
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
@@ -157,7 +157,7 @@
 @endsection
 
 @section('css')
-    <link href="{{ asset('assets/DataTables/datatables.min.css') }}" />
+    <link href="{{ asset('assets/DataTables/datatables.min.css') }}" rel="stylesheet" />
 @endsection
 
 @section('js')

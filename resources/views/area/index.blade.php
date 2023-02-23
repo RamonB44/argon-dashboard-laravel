@@ -116,8 +116,8 @@
                                     class="btn btn-primary btn-block btn-lg">Agregar</a>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="table table-responsive offset-md-2 col-md-8">
+                        <div class="row justify-content-md-center">
+                            <div class="table table-responsive col-md">
                                 <table class="table table-bordered">
                                     <thead>
                                         <th>#</th>
@@ -133,7 +133,7 @@
                     </div><!-- /.modal-content -->
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-primary">Guardar</button>
-                        <a type="button" class="btn bg-gradient-secondary" data-bs-dismiss="modal"">Cerrar</a>
+                        <a type="button" class="btn bg-gradient-secondary" data-bs-dismiss="modal">Cerrar</a>
                     </div>
                 </form>
             </div>
@@ -180,8 +180,8 @@
                                     class="btn btn-primary btn-block btn-lg">Agregar</a>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="table table-responsive offset-md-2 col-md-8">
+                        <div class="row justify-content-md-center">
+                            <div class="table table-responsive col-md">
                                 <!--<small>Agregar [ + ]</a></small>-->
                                 <table class="table table-bordered">
                                     <thead>
@@ -198,7 +198,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-primary" id="btnSend">Guardar</button>
-                        <a type="button" class="btn btn-default" id="btnclosemodal" data-dismiss="modal">Cerrar</a>
+                        <a type="button" class="btn bg-gradient-secondary" data-bs-dismiss="modal">Cerrar</a>
                     </div>
                 </form>
             </div><!-- /.modal-content -->
@@ -207,7 +207,7 @@
 
 @endsection
 @section('css')
-    <link href="{{ asset('assets/DataTables/datatables.min.css') }}" />
+    <link href="{{ asset('assets/DataTables/datatables.min.css') }}" rel="stylesheet" />
 @endsection
 
 @section('js')

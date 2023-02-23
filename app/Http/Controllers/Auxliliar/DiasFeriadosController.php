@@ -58,7 +58,7 @@ class DiasFeriadosController extends Controller
                 $data["success"] = true;
                 $data["data"] = $proceso;
                 $data["message"] = "Registrado Correcto";
-                return redirect()->route('offdays.index');
+                return redirect()->route('offday.index');
             } catch (\Throwable $th) {
                 //throw $th;
                 $data["success"] = false;
@@ -85,7 +85,7 @@ class DiasFeriadosController extends Controller
                 $data["success"] = true;
                 $data["data"] = $datos;
                 $data["message"] = "Editado Correcto";
-                return redirect()->route('offdays.index');
+                return redirect()->route('offday.index');
                 // return $data;
             } else {
                 $data["success"] = true;

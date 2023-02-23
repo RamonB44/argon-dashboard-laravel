@@ -33,6 +33,7 @@ use App\Http\Controllers\ProcesosController;
 use App\Http\Controllers\SedesController;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\AreaController;
+use App\Http\Controllers\AsistenciaController;
 use App\Http\Controllers\Auxliliar\DiasFeriadosController;
 use App\Http\Controllers\Auxliliar\TipoRegistroController;
 use App\Http\Controllers\ManageAssistanceController;
@@ -180,7 +181,7 @@ Route::group(['middleware' => 'auth'], function () {
     });
 
     Route::prefix('auxiliar')->group(function () {
-        Route::controller(TipoRegistroController::class)->prefix('auxiliar/treg')->group(function () {
+        Route::controller(TipoRegistroController::class)->prefix('treg')->group(function () {
             Route::get('/index', 'index')->name('treg.index');
             Route::get('/getTable', 'getTable')->name('treg.getTable');
             Route::get('/create', 'create')->name('treg.create');
@@ -189,7 +190,7 @@ Route::group(['middleware' => 'auth'], function () {
             Route::post('/update/{id}', 'update')->name('treg.update');
             Route::get('/delete/{id}', 'delete')->name('treg.delete');
         });
-        Route::controller(DiasFeriadosController::class)->prefix('auxiliar/offday')->group(function () {
+        Route::controller(DiasFeriadosController::class)->prefix('offday')->group(function () {
             Route::get('/index', 'index')->name('offday.index');
             Route::get('/getTable', 'getTable')->name('offday.getTable');
             Route::get('/create', 'create')->name('offday.create');
@@ -255,6 +256,7 @@ Route::group(['middleware' => 'auth'], function () {
 
         Route::get('/editRegister/{id_register}', 'editRegister')->name('manageAssist.editRegister');
         Route::post('/editRegister/{id_register}', 'editRegister')->name('manageAssist.editRegister');
+
         Route::post('/editValidacion/{id_register}', 'editValidacion')->name('manageAssist.editValidacion');
         Route::get('/getregister/{code}', 'getregister')->name('manageAssist.getregister');
 

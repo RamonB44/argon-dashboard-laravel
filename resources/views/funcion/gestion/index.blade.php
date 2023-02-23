@@ -12,7 +12,7 @@
                                 <h2>Gestionar Funciones</h2>
                             </div>
                             <div class="col-md">
-                                <a class="btn btn-primary btn-block btn-md m-1" href="javascript:create()">Añadir</a>
+                                <a class="btn btn-primary btn-block btn-md m-1 w-100 h-100" href="javascript:create()">Añadir</a>
                             </div>
                         </div>
                     </div>
@@ -59,7 +59,7 @@
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-primary">Guardar</button>
                 </form>
-                <button type="button" class="btn btn-default" id="btnclosemodal" data-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn bg-gradient-secondary" data-bs-dismiss="modal">Cerrar</button>
             </div>
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
@@ -86,7 +86,7 @@
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-primary" id="btnSend">Guardar</button>
                 </form>
-                <button type="button" class="btn btn-default" id="btnclosemodal" data-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn bg-gradient-secondary" data-bs-dismiss="modal">Cerrar</button>
             </div>
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
@@ -94,7 +94,7 @@
 @endsection
 
 @section('css')
-    <link href="{{ asset('assets/DataTables/datatables.min.css') }}" />
+    <link href="{{ asset('assets/DataTables/datatables.min.css') }}" rel="stylesheet" />
 @endsection
 
 @section('js')
@@ -192,7 +192,7 @@
                     console.log(response);
                     $('#formupdate').attr('action', url + '/funcion/gestion/update/' + id);
                     // $('#code-edit').val(response.data.code);
-                    $('#funcion-edit').val(response.data.id_function);
+                    $('#funcion-edit').val(response.data.description);
                     // $('#hora_ingreso-edit').val(response.data.hora_ingreso);
                     // $('#hora_salida-edit').val(response.data.hora_salida);
                     $('#editModal').modal('show');

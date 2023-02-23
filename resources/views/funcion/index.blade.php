@@ -12,13 +12,14 @@
                                 <h2>Gestionar Funcion por area</h2>
                             </div>
                             <div class="col-md">
-                                <a class="btn btn-success btn-block btn-md m-1"
+                                <a class="btn btn-success btn-block btn-md m-1 w-100 "
                                     href="{{ route('funcion.destajo.index') }}">Gestionar funciones</a>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md">
-                                <a class="btn btn-primary btn-block btn-md m-1" href="javascript:create()">Añadir nueva
+                                <a class="btn btn-primary btn-block btn-md m-1 w-100 h-100"
+                                    href="javascript:create()">Añadir nueva
                                     funcion</a>
                             </div>
                         </div>
@@ -84,7 +85,7 @@
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-primary">Guardar</button>
                 </form>
-                <button type="button" class="btn btn-default" id="btnclosemodal" data-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn bg-gradient-secondary" data-bs-dismiss="modal">Cerrar</button>
             </div>
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
@@ -114,14 +115,20 @@
                             </div>
                             <div class="col-md-6">
                                 <small>Funcion</small>
-                                <input type="text" name="funcion" id="funcion-edit" class="form-control">
+                                <select name="funcion" id="funcion-edit" class="form-control">
+                                    @forelse (\DB::table('function')->get() as $item)
+                                        <option value="{{ $item->id }}">{{ $item->description }}</option>
+                                    @empty
+                                        <option value="null">SIN OPCIONES</option>
+                                    @endforelse
+                                </select>
                             </div>
                         </div>
                     </div>
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-primary" id="btnSend">Guardar</button>
                 </form>
-                <button type="button" class="btn btn-default" id="btnclosemodal" data-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn bg-gradient-secondary" data-bs-dismiss="modal">Cerrar</button>
             </div>
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
@@ -129,7 +136,7 @@
 @endsection
 
 @section('css')
-    <link href="{{ asset('assets/DataTables/datatables.min.css') }}" />
+    <link href="{{ asset('assets/DataTables/datatables.min.css') }}" rel="stylesheet" />
 @endsection
 
 @section('js')
@@ -233,7 +240,7 @@
                     $('#formupdate').attr('action', url + '/funcion/update/' + id);
                     // $('#code-edit').val(response.data.code);
                     $('#area-edit').val(response.data.id_area);
-                    $('#funcion-edit').val(response.data.description);
+                    $('#funcion-edit').val(response.data.id_function);
                     // $('#hora_ingreso-edit').val(response.data.hora_ingreso);
                     // $('#hora_salida-edit').val(response.data.hora_salida);
                     $('#editModal').modal('show');

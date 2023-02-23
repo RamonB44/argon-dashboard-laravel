@@ -267,7 +267,7 @@ class AreaController extends Controller
                 ->where('areas_sedes.id_sede', $id_sede)
                 ->where('areas_sedes.id_proceso', $id_proceso);
         })
-            ->groupBy('id_area')
+            ->groupBy('id_area','areas.area')
             ->select(DB::raw('areas_sedes.id_area as id, areas.area as area'))
             ->get();
 

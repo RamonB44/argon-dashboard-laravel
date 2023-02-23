@@ -181,9 +181,10 @@
     </div><!-- /.modal-dialog -->
 
 @endsection
+
 @section('css')
-    <link href="{{ asset('assets/DataTables/datatables.min.css') }}" />
-    <link href="{{ asset('assets/daterangepicker/daterangepicker.css') }}" />
+    <link href="{{ asset('assets/DataTables/datatables.min.css') }}" rel="stylesheet" />
+    <link href="{{ asset('assets/daterangepicker/daterangepicker.css') }}" rel="stylesheet" />
 @endsection
 
 @section('js')
@@ -393,6 +394,7 @@
                 return item[1];
             });
 
+            console.log(ids);
             if (ids.length > 0) {
                 //open model
 

@@ -123,7 +123,7 @@
 @endsection
 
 @section('css')
-    <link href="{{ asset('assets/DataTables/datatables.min.css') }}" />
+    <link href="{{ asset('assets/DataTables/datatables.min.css') }}" rel="stylesheet" />
 @endsection
 
 @section('js')

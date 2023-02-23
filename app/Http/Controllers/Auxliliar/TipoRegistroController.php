@@ -35,9 +35,9 @@ class TipoRegistroController extends Controller
                 $key + 1,
                 $value->abr,
                 $value->description,
-                "<span class='badge badge-primary' style='background-color:$value->color'>$value->color</span>",
-                ($value->aditionable)?"<span class='badge badge-success'>Si</span>":"<span class='badge badge-danger'>No</span>",
-                ($value->is_paid)?"<span class='badge badge-success'>Pagado</span>":"<span class='badge badge-danger'>No Pagado</span>",
+                "<span class='badge bg-gradient-primary' style='background-color:$value->color'>$value->color</span>",
+                ($value->aditionable)?"<span class='badge bg-gradient-success'>Si</span>":"<span class='badge bg-gradient-danger'>No</span>",
+                ($value->is_paid)?"<span class='badge bg-gradient-success'>Pagado</span>":"<span class='badge bg-gradient-danger'>No Pagado</span>",
                 $buttons
             ];
         }

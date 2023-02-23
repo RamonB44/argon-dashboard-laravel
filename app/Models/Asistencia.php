@@ -25,24 +25,24 @@ class Asistencia extends Model
 
     public function employes()
     {
-        return $this->belongsTo('App\Employes', 'id_employe')->orWhere('code',$this->code)->withTrashed();
+        return $this->belongsTo('App\Models\Employes', 'id_employe')->orWhere('code',$this->code)->withTrashed();
     }
 
     public function aux_type()
     {
-        return $this->belongsTo('App\Model\Auxiliar\TypeReg', 'id_aux_treg');
+        return $this->belongsTo('App\Models\Auxiliar\TypeReg', 'id_aux_treg');
     }
 
     public function sede()
     {
-        return $this->belongsTo('App\Sedes', 'id_sede');
+        return $this->belongsTo('App\Models\Sedes', 'id_sede');
     }
 
     public function funcion(){
-        return $this->belongsTo('App\Funcion','id_function');
+        return $this->belongsTo('App\Models\Funcion','id_function');
     }
 
     public function user(){
-        return $this->belongsTo('App\User','id_user_checked');
+        return $this->belongsTo('App\Models\User','id_user_checked');
     }
 }

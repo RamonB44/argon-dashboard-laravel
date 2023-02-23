@@ -97,7 +97,6 @@
         </div>
     </div>
 
-
     <div class="modal fade" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" id="createModal">
         <div class="modal-dialog modal-xl" role="document">
             <div class="modal-content">
@@ -171,7 +170,7 @@
 
 
 @section('css')
-    <link href="{{ asset('assets/DataTables/datatables.min.css') }}" />
+    <link href="{{ asset('assets/DataTables/datatables.min.css') }}" rel="stylesheet" />
 @endsection
 
 @section('js')

@@ -28,26 +28,26 @@
                             hidden>
                             <div class="row mb-2">
                                 <div class="col-md">
-                                    <a class="btn btn-success m-auto btn-block btn-sm" href="javascript:void(null)"
-                                        data-toggle="modal" data-target="#assistanceModal">Registrar Asistencia</a>
+                                    <a class="btn btn-success m-auto btn-block btn-sm w-100" href="javascript:void(null)"
+                                        data-bs-toggle="modal" data-bs-target="#assistanceModal">Registrar Asistencia</a>
                                 </div>
                                 <div class="col-md">
-                                    <a class="btn btn-primary m-auto btn-block btn-sm" href="javascript:void(null)"
-                                        data-toggle="modal" data-target="#permissionModal">Registrar Permisos</a>
+                                    <a class="btn btn-primary m-auto btn-block btn-sm w-100" href="javascript:void(null)"
+                                        data-bs-toggle="modal" data-bs-target="#permissionModal">Registrar Permisos</a>
                                 </div>
                                 <div class="col-md">
-                                    <a class="btn btn-primary m-auto btn-block btn-sm" href="javascript:void(null)"
-                                        data-toggle="modal" data-target="#licenceModal">Añadir Licencias</a>
+                                    <a class="btn btn-primary m-auto btn-block btn-sm w-100" href="javascript:void(null)"
+                                        data-bs-toggle="modal" data-bs-target="#licenceModal">Añadir Licencias</a>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md">
-                                    <a class="btn btn-warning m-auto btn-block btn-sm" href="javascript:void(null)"
-                                        data-toggle="modal" data-target="#vacationModal">Registrar Vacaciones</a>
+                                    <a class="btn btn-warning m-auto btn-block btn-sm w-100" href="javascript:void(null)"
+                                        data-bs-toggle="modal" data-bs-target="#vacationModal">Registrar Vacaciones</a>
                                 </div>
                                 <div class="col-md">
-                                    <a class="btn btn-danger m-auto btn-block btn-sm" href="javascript:void(null)"
-                                        data-toggle="modal" data-target="#ceseModal">Cesar Trabajor</a>
+                                    <a class="btn btn-danger m-auto btn-block btn-sm w-100" href="javascript:void(null)"
+                                        data-bs-toggle="modal" data-bs-target="#ceseModal">Cesar Trabajor</a>
                                 </div>
                             </div>
                             <hr>
@@ -61,15 +61,15 @@
                                             <div class="card-body">
                                                 <!-- the events -->
                                                 <div id="external-events">
-                                                    <div class="external-event bg-success ui-draggable ui-draggable-handle"
+                                                    <div class="external-event badge bg-gradient-success ui-draggable ui-draggable-handle"
                                                         style="position: relative;">Asistencia</div>
-                                                    <div class="external-event bg-warning ui-draggable ui-draggable-handle"
+                                                    <div class="external-event badge bg-gradient-warning ui-draggable ui-draggable-handle"
                                                         style="position: relative;">Licencia</div>
-                                                    <div class="external-event bg-info ui-draggable ui-draggable-handle"
+                                                    <div class="external-event badge bg-gradient-info ui-draggable ui-draggable-handle"
                                                         style="position: relative;">Permiso</div>
-                                                    <div class="external-event bg-primary ui-draggable ui-draggable-handle"
+                                                    <div class="external-event badge bg-gradient-primary ui-draggable ui-draggable-handle"
                                                         style="position: relative;">Libre</div>
-                                                    <div class="external-event bg-danger ui-draggable ui-draggable-handle"
+                                                    <div class="external-event badge bg-gradient-danger ui-draggable ui-draggable-handle"
                                                         style="position: relative;">Falta</div>
                                                     <div class="checkbox">
                                                         <label for="drop-remove">
@@ -151,8 +151,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-primary">Guardar</button>
-                        <button type="button" class="btn btn-default" id="btnclosemodal"
-                            data-dismiss="modal">Cerrar</button>
+                        <button type="button" class="btn bg-gradient-secondary" data-bs-dismiss="modal">Cerrar</button>
                     </div>
                 </form>
             </div><!-- /.modal-content -->
@@ -193,8 +192,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-primary">Guardar</button>
-                        <button type="button" class="btn btn-default" id="btnclosemodal"
-                            data-dismiss="modal">Cerrar</button>
+                        <button type="button" class="btn bg-gradient-secondary" data-bs-dismiss="modal">Cerrar</button>
                     </div>
                 </form>
             </div><!-- /.modal-content -->
@@ -238,8 +236,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-primary">Guardar</button>
-                        <button type="button" class="btn btn-default" id="btnclosemodal"
-                            data-dismiss="modal">Cerrar</button>
+                        <button type="button" class="btn bg-gradient-secondary" data-bs-dismiss="modal">Cerrar</button>
                     </div>
                 </form>
             </div><!-- /.modal-content -->
@@ -272,8 +269,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-primary">Guardar</button>
-                        <button type="button" class="btn btn-default" id="btnclosemodal"
-                            data-dismiss="modal">Cerrar</button>
+                        <button type="button" class="btn bg-gradient-secondary" data-bs-dismiss="modal">Cerrar</button>
                     </div>
                 </form>
             </div><!-- /.modal-content -->
@@ -301,8 +297,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-primary">Guardar</button>
-                        <button type="button" class="btn btn-default" id="btnclosemodal"
-                            data-dismiss="modal">Cerrar</button>
+                        <button type="button" class="btn bg-gradient-secondary" data-bs-dismiss="modal">Cerrar</button>
                     </div>
                 </form>
             </div><!-- /.modal-content -->
@@ -347,7 +342,7 @@
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-primary" id="btnSend">Guardar</button>
                 </form>
-                <button type="button" class="btn btn-default" id="btnclosemodal" data-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn bg-gradient-secondary" data-bs-dismiss="modal">Cerrar</button>
             </div>
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
@@ -361,7 +356,7 @@
                         <h4 class="modal-title">Editar Registro</h4>
                         <a class="btn btn-danger" id="btn_delete" href="javascript:void(null)">Eliminar</a>
                     </div>
-                    {{ csrf_field() }}
+                    @csrf
                     <div class="modal-body">
                         <div class="row">
                             <div class="col-md">
@@ -400,18 +395,18 @@
                     </div>
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-primary">Guardar</button>
-                        <button type="button" class="btn btn-default" id="btnclosemodal"
-                            data-dismiss="modal">Cerrar</button>
+                        <button type="button" class="btn bg-gradient-secondary" data-bs-dismiss="modal">Cerrar</button>
                     </div>
                 </form>
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
 @endsection
+
 @section('css')
-    <link href="{{ asset('assets/fullCalendarJs/fullcalendar/main.min.css') }}" />
-    <link href="{{ asset('assets/fullCalendarJs/fullcalendar-daygrid/main.min.css') }}" />
-    <link href="{{ asset('assets/fullCalendarJs/fullcalendar-bootstrap/main.min.css') }}" />
+    <link href="{{ asset('assets/fullCalendarJs/fullcalendar/main.min.css') }}" rel="stylesheet" />
+    <link href="{{ asset('assets/fullCalendarJs/fullcalendar-daygrid/main.min.css') }}" rel="stylesheet" />
+    <link href="{{ asset('assets/fullCalendarJs/fullcalendar-bootstrap/main.min.css') }}" rel="stylesheet" />
 @endsection
 
 @section('js')
@@ -708,7 +703,6 @@
             })
         });
 
-
         $('#formRemove').submit(function(e) {
             e.preventDefault();
             var datos = {};
@@ -785,11 +779,11 @@
         $('#formupdateRegister').submit(function(e) {
             e.preventDefault();
             var datos = {};
-            datos['d_since_at'] = $('#d_since_at_edit').val();
-            datos['d_until_at'] = $('#d_until_at_edit').val();
-            datos['h_until_at'] = $('#h_until_at_edit').val();
-            datos['h_since_at'] = $('#h_since_at_edit').val();
-            datos['description'] = $('#description_edit').val();
+            $("form#formupdateRegister :input").each(function(i, e) {
+                // var input = $(this).val(); // This is the jquery object of the input, do what you will
+                datos[$(e).attr('name')] = $(e).val();
+            });
+
 
             $.ajaxSetup({
                 headers: {
@@ -798,11 +792,11 @@
             });
 
             $.ajax({
-                url: $(this).attr('action'),
+                url:  $('#formupdateRegister').attr('action'),
                 method: 'POST',
                 data: datos,
                 success: function(response) {
-                    console.log(response);
+                    console.log("hollaa");
                     updateCalendarData(response.calendardata);
                     // clean();
                     showMessageBox(response);

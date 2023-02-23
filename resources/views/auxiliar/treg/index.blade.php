@@ -64,20 +64,24 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-2">
-                                <small>Registro Adicional?</small>
-                                <input type="checkbox" name="aditionable" id="aditionable" class="form-control">
+                            <div class="col-md">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" name="aditionable" id="aditionable" type="checkbox" >
+                                    <label class="form-check-label" for="aditionable">Registro Adicional?</label>
+                                </div>
                             </div>
-                            <div class="col-md-2">
-                                <small>Remunerado?</small>
-                                <input type="checkbox" name="is_paid" id="is_paid" class="form-control">
+                            <div class="col-md">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" name="is_paid" id="is_paid" type="checkbox" >
+                                    <label class="form-check-label" for="is_paid">Remunerado?</label>
+                                </div>
                             </div>
                         </div>
                     </div>
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-primary">Guardar</button>
                 </form>
-                <button type="button" class="btn btn-default" id="btnclosemodal" data-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn bg-gradient-secondary" data-bs-dismiss="modal">Cerrar</button>
             </div>
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
@@ -109,20 +113,24 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-2">
-                                <small>Registro Adicional?</small>
-                                <input type="checkbox" name="aditionable" id="edit-aditionable" class="form-control">
+                            <div class="col-md">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" name="aditionable" id="edit-aditionable" type="checkbox" >
+                                    <label class="form-check-label" for="aditionable">Registro Adicional?</label>
+                                </div>
                             </div>
-                            <div class="col-md-2">
-                                <small>Remunerado?</small>
-                                <input type="checkbox" name="is_paid" id="edit-is_paid" class="form-control">
+                            <div class="col-md">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" name="is_paid" id="edit-is_paid" type="checkbox">
+                                    <label class="form-check-label" for="is_paid">Remunerado?</label>
+                                </div>
                             </div>
                         </div>
                     </div>
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-primary" id="btnSend">Guardar</button>
                 </form>
-                <button type="button" class="btn btn-default" id="btnclosemodal" data-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn bg-gradient-secondary" data-bs-dismiss="modal">Cerrar</button>
             </div>
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
@@ -131,7 +139,7 @@
 
 
 @section('css')
-    <link href="{{ asset('assets/DataTables/datatables.min.css') }}" />
+    <link href="{{ asset('assets/DataTables/datatables.min.css') }}" rel="stylesheet" />
 @endsection
 
 @section('js')

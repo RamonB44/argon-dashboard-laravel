@@ -14,25 +14,25 @@ class Employes extends Model
 
     public function funcion()
     {
-        return $this->belongsTo('App\Funcion', 'id_function');
+        return $this->belongsTo('App\Models\Funcion', 'id_function');
     }
 
     public function procesos()
     {
-        return $this->belongsTo('App\Procesos', 'id_proceso');
+        return $this->belongsTo('App\Models\Procesos', 'id_proceso');
     }
 
     public function sedes()
     {
-        return $this->belongsTo('App\Sedes', 'id_sede');
+        return $this->belongsTo('App\Models\Sedes', 'id_sede');
     }
 
     public function employes_type(){
-        return $this->belongsTo('App\EmployesType','id_employe_type');
+        return $this->belongsTo('App\Models\EmployesType','id_employe_type');
     }
 
     public function employes_process(){
-        return $this->belongsToMany('App\Procesos','procesos_employe','id_employe','id_proceso')->withPivot(['id','until_at','deleted_at'])->withTimestamps();
+        return $this->belongsToMany('App\Models\Procesos','procesos_employe','id_employe','id_proceso')->withPivot(['id','until_at','deleted_at'])->withTimestamps();
     }
 
 }

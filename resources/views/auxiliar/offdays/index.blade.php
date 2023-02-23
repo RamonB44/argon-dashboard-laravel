@@ -50,7 +50,7 @@
                                 <small>Año <strong class="text-info">Solo en ese año se realizara el
                                         feriado.</strong></small>
                                 <select name="year" id="year" class="form-control">
-                                    <option selected value="null">Todos los años</option>
+                                    <option selected value="">Todos los años</option>
                                     @for ($i = 2020; $i <= Carbon\Carbon::now()->format('Y'); $i++)
                                         <option value="{{ $i }}">{{ $i }}</option>
                                     @endfor
@@ -79,7 +79,7 @@
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-primary">Guardar</button>
                 </form>
-                <button type="button" class="btn btn-default" id="btnclosemodal" data-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn bg-gradient-secondary" data-bs-dismiss="modal">Cerrar</button>
             </div>
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
@@ -101,7 +101,7 @@
                                 <small>Año <strong class="text-info">Solo en ese año se realizara el
                                         feriado.</strong></small>
                                 <select name="year" id="edit-year" class="form-control">
-                                    <option selected value="null">Todos los años</option>
+                                    <option selected value="NULL">Todos los años</option>
                                     @for ($i = 2020; $i <= Carbon\Carbon::now()->format('Y'); $i++)
                                         <option value="{{ $i }}">{{ $i }}</option>
                                     @endfor
@@ -130,15 +130,14 @@
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-primary" id="btnSend">Guardar</button>
                 </form>
-                <button type="button" class="btn btn-default" id="btnclosemodal" data-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn bg-gradient-secondary" data-bs-dismiss="modal">Cerrar</button>
             </div>
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
-    </div><!-- /.modal -->
 @endsection
 
 @section('css')
-    <link href="{{ asset('assets/DataTables/datatables.min.css') }}" />
+    <link href="{{ asset('assets/DataTables/datatables.min.css') }}" rel="stylesheet" />
 @endsection
 
 @section('js')
@@ -240,7 +239,7 @@
                     console.log(response);
                     $('#formupdate').attr('action', url + '/auxiliar/offday/update/' + id);
                     // $('#code-edit').val(response.data.code);
-                    $('#edit-year').val((response.data.year) ? response.data.year : "null");
+                    $('#edit-year').val((response.data.year) ? response.data.year : "NULL");
                     $('#edit-month').val(response.data.month);
                     $('#edit-day').val(response.data.day);
                     $('#editModal').modal('show');
