@@ -8,7 +8,7 @@
 
 @section('content')
 <div class="container">
-    
+
     <div id="eleccion" class="row d-flex justify-content-center mt-5">
         <div class="col-md-6">
             <div class="card mb-3" style="max-width: 540px;">
@@ -48,24 +48,24 @@
             </div>
         </div>
     </div>
-    
-    <!--<div class="row">-->
-    <!--    <div id="resultado" class="d-flex justify-content-center">-->
-            
-    <!--        <figure class="highcharts-figure">-->
-    <!--            <div id="chart"></div>-->
-    <!--        </figure>-->
-            
-    <!--    </div>-->
-    <!--</div>-->
-    
+
+    {{-- <div class="row">
+        <div id="resultado" class="d-flex justify-content-center">
+
+            <figure class="highcharts-figure">
+                <div id="chart"></div>
+           </figure>
+
+        </div>
+    </div> --}}
+
 </div>
 @endsection
 @section('css')
 <style>
-    
+
 .highcharts-figure, .highcharts-data-table table {
-    min-width: 320px; 
+    min-width: 320px;
     width: 500px;
     max-width: 800px;
     margin: 1em auto;
@@ -107,7 +107,7 @@
 <script src="https://code.highcharts.com/modules/export-data.js"></script>
 <script src="https://code.highcharts.com/modules/accessibility.js"></script>
 <script>
-    
+
 </script>
 <script>
 // script for sunburst graphics
@@ -127,7 +127,7 @@ function loadSunBurst(dom_element,data){
 
     // Splice in transparent for the center circle
     Highcharts.getOptions().colors.splice(0, 0, "transparent");
-    
+
     Highcharts.chart(dom_element, {
         chart: {
             height: '100%',
@@ -162,7 +162,7 @@ function loadSunBurst(dom_element,data){
                         operator: '>',
                         value: 64
                     }
-                    
+
                 }
             }, {
                 level: 2,
@@ -182,7 +182,7 @@ function loadSunBurst(dom_element,data){
                     to: 0.5
                 }
             }]
-    
+
         }],
         tooltip: {
             headerFormat: "",
@@ -193,6 +193,4 @@ function loadSunBurst(dom_element,data){
 }
 
 </script>
-<script></script>
-<script></script>
 @endsection

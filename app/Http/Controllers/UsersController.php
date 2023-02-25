@@ -51,7 +51,7 @@ class UsersController extends Controller
 
             $data['data'][$key] = [
                 $key + 1,
-                $value->name,
+                $value->username,
                 $value->email,
                 ($value->deleted_at) ? "Inactivo" : "Activo",
                 Carbon::parse($value->created_at)->format('d/m/Y'),
@@ -110,9 +110,10 @@ class UsersController extends Controller
         $this->validator($req->all(), null)->validate();
         // redirect()->back()
         $employe = User::create([
-            'name' => $req->name,
+            'username' => $req->name,
             'email' => $req->email,
-            'password' => Hash::make($req->password)
+            //'password' => Hash::make($req->password)
+            'password' => $req->password
         ]);
 
         if ($req->group == 2) {
@@ -165,10 +166,10 @@ class UsersController extends Controller
         if ($req->all()) {
             $this->validator($req->all(), $user->id)->validate();
             // redirect()->back()
-            $user->name = $req->name;
+            $user->username = $req->name;
             $user->email = $req->email;
             if ($req->password) {
-                $user->password = Hash::make($req->password);
+                $user->password = $req->password;
             }
             $user->save();
             // return $req->all();

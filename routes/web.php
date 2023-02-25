@@ -36,6 +36,7 @@ use App\Http\Controllers\AreaController;
 use App\Http\Controllers\AsistenciaController;
 use App\Http\Controllers\Auxliliar\DiasFeriadosController;
 use App\Http\Controllers\Auxliliar\TipoRegistroController;
+use App\Http\Controllers\ExcelController;
 use App\Http\Controllers\ManageAssistanceController;
 use App\Http\Controllers\ReportsController;
 
@@ -312,5 +313,67 @@ Route::group(['middleware' => 'auth'], function () {
         //employes
         Route::post('/employe/getxlsx', 'getXlsxEmploye')->name('xlsx.getEmployeXlsx');
         Route::post('/employeprocess/getxlsx', 'getXlsxEmployeProcess')->name('xlsx.getEmployesProcessXlsx');
+    });
+
+
+    Route::controller(HomeController::class)->prefix('home')->group(function () {
+
+        Route::get('/loadAssistances/{start}/{end}/{sede}','loadAssistance')->name('home.Assistance');
+            Route::get('/loadAssistances/{start}/{end}/{sede}/{proceso}','loadAssistance')->name('home.Assistance');
+
+        Route::get('/loadGraphics/{start}/{end}/{sede}', 'loadGraphics')->name('home.graphics');
+
+        Route::get('/loadPieGraphics/{start}/{end}/{sede}', 'loadPieGraphics')->name('home.Piegraphics');
+
+        Route::get('/loadGraphicsbyType/{start}/{end}/{sede}/{checked}', 'loadGraphicsbyType')->name('home.PiegraphicsType');
+            Route::get('/loadGraphicsbyType/{start}/{end}/{sede}/{checked}/{time}', 'loadGraphicsbyType')->name('home.PiegraphicsType');
+                Route::get('/loadGraphicsbyType/{start}/{end}/{sede}/{checked}/{time}/{proceso}', 'loadGraphicsbyType')->name('home.PiegraphicsType');
+
+        Route::get('/loadGraphicsbyTypeArea/{area}/{start}/{end}/{sede}', 'loadGraphicsbyTypeArea')->name('home.PiegraphicsTypeArea');
+        Route::get('/loadGraphicsbyArea/{area}/{start}/{end}/{sede}', 'loadGraphicsbyArea')->name('home.Areagraphics');
+        Route::get('/loadGraphicsbyAreaML/{area}/{start}/{end}/{sede}', 'loadGraphicsbyAreaML')->name('home.AreagraphicsML');
+
+        Route::get('/loadAssistancebyArea/{start}/{end}/{sede}/{id_user}/{checked}', 'loadAssistanceByArea')->name('home.AssistanceByArea');
+            Route::get('/loadAssistancebyArea/{start}/{end}/{sede}/{id_user}/{checked}/{time}', 'loadAssistanceByArea')->name('home.AssistanceByArea');
+                Route::get('/loadAssistancebyArea/{start}/{end}/{sede}/{id_user}/{checked}/{time}/{multiplicador}', 'loadAssistanceByArea')->name('home.AssistanceByArea');
+                    Route::get('/loadAssistancebyArea/{start}/{end}/{sede}/{id_user}/{checked}/{time}/{multiplicador}/{proceso}', 'loadAssistanceByArea')->name('home.AssistanceByArea');
+
+        Route::get('/loadGraphicsbydirind/{start}/{end}/{sede}/{checked}', 'loadGraphicsbyIndDir')->name('home.PiegraphicsDirInd');
+            Route::get('/loadGraphicsbydirind/{start}/{end}/{sede}/{checked}/{time}', 'loadGraphicsbyIndDir')->name('home.PiegraphicsDirInd');
+                Route::get('/loadGraphicsbydirind/{start}/{end}/{sede}/{checked}/{time}/{proceso}', 'loadGraphicsbyIndDir')->name('home.PiegraphicsDirInd');
+
+        Route::get('/loadAssistancebyUser/{start}/{end}/{sede}', 'assistanceByUser')->name('home.assistanceByUser');
+            Route::get('/loadAssistancebyUser/{start}/{end}/{sede}/{time}', 'assistanceByUser')->name('home.assistanceByUser');
+                Route::get('/loadAssistancebyUser/{start}/{end}/{sede}/{time}/{proceso}', 'assistanceByUser')->name('home.assistanceByUser');
+
+        Route::get('/loadlistworker/{start}/{end}/{id_user}/{id_sede}/{type}', 'loadlistworker')->name('home.loadlistworker');
+            Route::get('/loadlistworker/{start}/{end}/{id_user}/{id_sede}/{type}/{time}', 'loadlistworker')->name('home.loadlistworker');
+                Route::get('/loadlistworker/{start}/{end}/{id_user}/{id_sede}/{type}/{time}/{proceso}', 'loadlistworker')->name('home.loadlistworker');
+
+        Route::get('/loadlistworkerbyArea/{start}/{end}/{id_area}/{id_sede}/{type}', 'loadlistworkerbyArea')->name('home.loadlistworkerbyArea');
+            Route::get('/loadlistworkerbyArea/{start}/{end}/{id_area}/{id_sede}/{type}/{time}', 'loadlistworkerbyArea')->name('home.loadlistworkerbyArea');
+                Route::get('/loadlistworkerbyArea/{start}/{end}/{id_area}/{id_sede}/{type}/{time}/{id_proceso}', 'loadlistworkerbyArea')->name('home.loadlistworkerbyArea');
+
+        Route::get('/loadGraphicsbydirindUser/{start}/{end}/{id_user}', 'loadGraphicsbyIndDirUser')->name('home.PiegraphicsDirIndUser');
+            Route::get('/loadGraphicsbydirindUser/{start}/{end}/{id_user}/{time}', 'loadGraphicsbyIndDirUser')->name('home.PiegraphicsDirIndUser');
+        Route::get('/loadGraphicsbyTypeUser/{start}/{end}/{id_user}', 'loadGraphicsbyTypeUser')->name('home.PiegraphicsTypeUser');
+            Route::get('/loadGraphicsbyTypeUser/{start}/{end}/{id_user}/{time}', 'loadGraphicsbyTypeUser')->name('home.PiegraphicsTypeUser');
+
+        Route::get('/loadPieCustomGraphics/{start}/{end}/{sede}/{id_user}/{checked}', 'loadPieCustomGraphics')->name('home.CustomPiegraphics');
+            Route::get('/loadPieCustomGraphics/{start}/{end}/{sede}/{id_user}/{checked}/{proceso}', 'loadPieCustomGraphics')->name('home.CustomPiegraphics');
+
+        Route::get('/loadBackOffice/{start}/{end}/{sede}/{id_user}/{checked}', 'loadBackOffice')->name('home.loadBackOffice');
+            Route::get('/loadBackOffice/{start}/{end}/{sede}/{id_user}/{checked}/{proceso}', 'loadBackOffice')->name('home.loadBackOffice');
+            // Route::get('/loadPieCustomGraphics/{start}/{end}/{sede}/{id_user}/{checked}/{multi', 'HomeController@loadPieCustomGraphics')->name('home.CustomPiegraphics');
+
+        Route::get('/loadSummaryWorker/{start}/{end}/{id_area}/{proceso}/{id_sede}', 'loadSummaryWorker')->name('home.loadSummaryWorker');
+            Route::get('/loadSummaryWorker/{start}/{end}/{id_area}/{proceso}/{id_sede}/{multiplicador}', 'loadSummaryWorker')->name('home.loadSummaryWorker');
+
+        Route::get('/loadDestajo/{sede_id}/{proceso_id}/{start}/{end}','loadDestajo')->name('dtj.process');
+            Route::get('/loadDestajo/{sede_id}/{proceso_id}/{start}/{end}/{costo}/{time}','loadDestajo')->name('dtj.process');
+
+        Route::get('/loadDestajoMembers/{sede_id}/{proceso_id}/{area_id}/{funcion_id}/{start}/{end}','loadDestajoMembers')->name('dtj.members');
+            Route::get('/loadDestajoMembers/{sede_id}/{proceso_id}/{area_id}/{funcion_id}/{start}/{end}/{turno}','loadDestajoMembers')->name('dtj.members');
+
     });
 });

@@ -3,7 +3,6 @@
 @section('content')
     @include('layouts.navbars.auth.topnav', ['title' => 'Editar Usuarios'])
 
-@section('content')
     <div class="container-fluid">
         <div class="row justify-content-center">
             <div class="col-md-12">
@@ -23,7 +22,7 @@
                                         <strong class="text-danger">{{ $errors->first('name') }}</strong>
                                     @endif
                                     <input type="text" class="form-control" name="name" id="name"
-                                        {{ $errors->has('name') ? 'is-invalid' : '' }} value="{{ $user->name }}"
+                                        {{ $errors->has('username') ? 'is-invalid' : '' }} value="{{ $user->username }}"
                                         autofocus>
                                 </div>
                                 <div class="col-md-4">

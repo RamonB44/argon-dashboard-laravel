@@ -109,7 +109,7 @@
                                     <input type="hidden" id="sedes" name="sedes" value="0">
                                     <input type="hidden" id="areas" name="areas" value="0">
                                     <input type="hidden" id="turnos" name="turnos" value="0">
-                                    <button type="submit" class="btn btn-success m-1 btn-sm btn-block">Exportar
+                                    <button type="submit" class="btn btn-success m-1 btn-sm btn-block w-100">Exportar
                                         [RR.HH]</button>
                                 </form>
                             </div>

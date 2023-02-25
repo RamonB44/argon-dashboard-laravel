@@ -1261,7 +1261,7 @@ class ExcelController extends Controller
                 // dd($hora);
                 $newdate = str_replace(" ","",$date->format('d m Y'));
                 // $enddate = empty($enddate) ? "" : str_replace(" ","",$enddate->format('d m Y'));
-                $code = \App\Model\Auxiliar\Suplencia::where('h_goin',$hora)->first();
+                $code = \App\Models\Auxiliar\Suplencia::where('h_goin',$hora)->first();
                 // }
                 $newData[$contador]["codigo"] = $value->employes->code;
                 // $newData[$contador]["timr6"] = "";

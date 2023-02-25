@@ -20,7 +20,7 @@
                     {{-- <small>Sedes</small> --}}
                     <select name="sedes" id="sedes" class="form-control">
                         <option value="0">Todas mis sedes</option>
-                        @foreach (App\Sedes::all() as $item)
+                        @foreach (App\Models\Sedes::all() as $item)
                             @if(in_array($item->id,$config['sedes']))
                                 <option value="{{ $item->id }}" >SEDE PLANTA {{ $item->name }}</option>
                             @endif
@@ -31,7 +31,7 @@
                 <div class="col-md bd-highlight mb-2">
                     <select class="form-control" name="cultivo" id="cultivo">
                         <option value="ALL">Todas mis procesos</option>
-                        @foreach ( \App\Procesos::whereIn('id', \DB::table('areas_sedes')->whereIn('id_sede',$config['sedes'])->select('id_proceso')->distinct('id_proceso')->get()->pluck('id_proceso')->toArray() )->get() as $item)
+                        @foreach ( \App\Models\Procesos::whereIn('id', \DB::table('areas_sedes')->whereIn('id_sede',$config['sedes'])->select('id_proceso')->distinct('id_proceso')->get()->pluck('id_proceso')->toArray() )->get() as $item)
                                 <option value="{{ $item->id }}" >{{ $item->name }}</option>
                         @endforeach
                     </select>
@@ -42,7 +42,7 @@
 
                       <option value="0">Todos</option>
                       @php
-                            $time =Carbon\ Carbon::now()->timezone('America/Lima');
+                            $time = Carbon\Carbon::now()->timezone('America/Lima');
                             $morning = Carbon\Carbon::create($time->year, $time->month, $time->day, 4, 0, 0); //set time to 04:00 : 4AM
                             $evening = Carbon\Carbon::create($time->year, $time->month, $time->day, 14, 0, 0); //set time to 14:00 : 2PM
                       @endphp
@@ -257,7 +257,7 @@
                 }
             ],
         }
-        
+
         loadUSD();
     });
 
@@ -265,7 +265,7 @@
         // call your code here that you want to run after all $(document).ready() calls have run
         loadGraphics(start_date, end_date);
     }, 1500);
-    
+
     $('#switch_usd' ).on( "click", function(){
 
 
@@ -396,7 +396,7 @@
     // setInterval(function(){
     //     loadGraphics(start_date, end_date);
     // },60000);
-    
+
     function loadUSD(){
         return new Promise((resolve,reject)=>{
             $.ajax({
