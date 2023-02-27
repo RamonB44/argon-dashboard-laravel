@@ -17,7 +17,7 @@
                                     $query->whereIn('id_area',$areas);
                                 })->where('id_sede','=',$sede)->where('id_aux_treg','=',1)->whereBetween(DB::raw('UNIX_TIMESTAMP(DATE_FORMAT(created_at, "%Y-%m-%d %H:%i"))'), [strtotime($fecha1->format('Y-m-d H:i')), strtotime($fecha2->addHours(23)->addMinutes(59)->format('Y-m-d H:i'))])
                                 ->select(DB::raw('count(*) as asistencias'),DB::raw('sum(case when checked = 1 then 1 else 0 end) as verificados'))->first();*/
-                        $datos = App\Asistencia::where('id_user_checked','=',$value->id)->where('id_aux_treg','=',1)->whereBetween(DB::raw('UNIX_TIMESTAMP(DATE_FORMAT(created_at, "%Y-%m-%d %H:%i"))'), [strtotime($fecha1->format('Y-m-d H:i')), strtotime($fecha2->addHours(23)->addMinutes(59)->format('Y-m-d H:i'))])
+                        $datos = App\Models\Asistencia::where('id_user_checked','=',$value->id)->where('id_aux_treg','=',1)->whereBetween(DB::raw('UNIX_TIMESTAMP(DATE_FORMAT(created_at, "%Y-%m-%d %H:%i"))'), [strtotime($fecha1->format('Y-m-d H:i')), strtotime($fecha2->addHours(23)->addMinutes(59)->format('Y-m-d H:i'))])
                                 ->select(DB::raw('count(*) as asistencias'),DB::raw('coalesce(sum(case when checked = 1 then 1 else 0 end),0) as verificados'))->first();
                         $unchecked = \DB::table('reg_unchecked')->whereBetween(DB::raw('UNIX_TIMESTAMP(DATE_FORMAT(created_at, "%Y-%m-%d %H:%i"))'), [strtotime($fecha1->format('Y-m-d H:i')), strtotime($fecha2->addHours(23)->addMinutes(59)->format('Y-m-d H:i'))])->where('id_user','=',$value->id)->count();
                     @endphp

@@ -1,13 +1,9 @@
-@extends('layouts.app-2')
+@extends('layouts.app-gerencia')
 
 @section('title', 'Gerencia')
 
-@section('content_header')
-    <h1 class="m-0 text-dark">Reporte Gerencia</h1>
-@stop
-
 @section('content')
-<div class="container">
+{{-- <div class="container"> --}}
         <div class="row justify-content-between mb-2">
             <div class="col-md-6 bd-highlight text-center" >
                 <ul class="list-group list-group-horizontal-sm m-auto" style="border-color: rgb(93, 60, 129)">
@@ -20,13 +16,13 @@
                     <li class="list-group-item" style="background-color: rgb(93, 60, 129)">
                         <a href="javascript:setTime('NOCHE')" style="color: #ffffff;font-weight: bold">Asistencia Noche : <strong id="total-noche">100</strong></a>
                     </li>
-                    <li class="list-group-item list-group-item-info text-center" >
+                    <li class="list-group-item text-center" style="background-color: lightskyblue;">
                         <a href="javascript:listWorkers(0,'V');"  style="color: #000000;font-weight:bold">
                             Verificado :
                             <strong id="total_v">100</strong>
                         </a>
                     </li>
-                    <li class="list-group-item list-group-item-danger text-center"><a href="javascript:listWorkers(0,'SV');" style="color: #000000;font-weight:bold">
+                    <li class="list-group-item text-center" style="background-color: red;"><a href="javascript:listWorkers(0,'SV');" style="color: #000000;font-weight:bold">
                         Falta Verificar : <strong id="total_sv">100</strong></a></li>
                 </ul>
             </div>
@@ -37,7 +33,7 @@
                         <a href="javascript:listWorkers(0,'SM')" style="color: #000000;font-weight:bold">
                             FA : <strong id="total_sm">0</strong></a>
                     </li>
-                    <li class="list-group-item list-group-item-warning">
+                    <li class="list-group-item list-group-item-warning"style="background-color: #935f00">
                         <a href="javascript:listWorkers(0,'SR')" style="color: #000000;font-weight:bold">
                             FR : <strong id="total_sr">0</strong></a>
                     </li>
@@ -51,7 +47,7 @@
             <div hidden class="col-md bd-highlight mb-2">
                 <small>Sedes</small>
                 <select name="sedes" id="sedes" class="form-control">
-                    @foreach (App\Sedes::all() as $item)
+                    @foreach (App\Models\Sedes::all() as $item)
                         @if(in_array($item->id,$config['sedes']))
                             <option value="{{ $item->id }}" >{{ $item->name }}</option>
                         @endif
@@ -63,7 +59,7 @@
                 <small>Mis Procesos</small>
                 <select class="form-control" name="cultivo" id="cultivo">
                     <option value="ALL">Todos mis procesos</option>
-                    @foreach ( \App\Procesos::whereIn('id', \DB::table('areas_sedes')->where('id_sede',$main_sede)->select('id_proceso')->distinct('id_proceso')->get()->pluck('id_proceso')->toArray() )->get() as $item)
+                    @foreach ( App\Models\Procesos::whereIn('id', \DB::table('areas_sedes')->where('id_sede',$main_sede)->select('id_proceso')->distinct('id_proceso')->get()->pluck('id_proceso')->toArray() )->get() as $item)
                             <option value="{{ $item->id }}" >{{ $item->name }}</option>
                     @endforeach
                 </select>
@@ -138,186 +134,192 @@
                 </div>
             </div>
         </div>
-        <div id="carouselExampleFade" class="carousel slide carousel-fade row" data-interval="false" data-ride="carousel">
-
-            <div class="carousel-item active">
-                <div class="row mb-3">
-                    <div class="col-md-6">
-                        <div class="card">
-                            <div class="card-header text-center text-white badge-info" style="background-color: rgb(93, 60, 129)">
-                                TIPO DE EMPLEADO
-                            </div>
-                            <div class="card-body">
-                                <div class="chart">
-                                    <div class="chartjs-size-monitor">
-                                        <div class="chartjs-size-monitor-expand">
-                                            <div class="">
-                                            </div>
-                                        </div>
-                                        <div class="chartjs-size-monitor-shrink">
-                                            <div class="">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <canvas id="pieChart" style="height: 400px; min-height: 230px; display: block; width: 400px;" width="487" height="230" class="chartjs-render-monitor">
-                                    </canvas>
+        <div id="carouselExampleFade" class="carousel slide carousel-fade row" data-ride="carousel" >
+            <div class="carousel-indicators">
+                <li data-target="#carouselExampleFade" data-bs-slide-to="0" class="active"></li>
+                <li data-target="#carouselExampleFade" data-bs-slide-to="1"></li>
+                <li data-target="#carouselExampleFade" data-bs-slide-to="2"></li>
+            </div>
+            <div class="carousel-inner">
+                <div class="carousel-item active" >
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <div class="card">
+                                <div class="card-header text-center text-white badge-info" style="background-color: rgb(93, 60, 129)">
+                                    TIPO DE EMPLEADO
                                 </div>
+                                <div class="card-body">
+                                    <div class="chart">
+                                        <div class="chartjs-size-monitor">
+                                            <div class="chartjs-size-monitor-expand">
+                                                <div class="">
+                                                </div>
+                                            </div>
+                                            <div class="chartjs-size-monitor-shrink">
+                                                <div class="">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <canvas id="pieChart" style="height: 400px; min-height: 230px; display: block; width: 400px;" width="487" height="230" class="chartjs-render-monitor">
+                                        </canvas>
+                                    </div>
+                                </div>
+                                <!-- /.card-body -->
                             </div>
-                            <!-- /.card-body -->
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card">
+                                <div class="card-header text-center text-white badge-info" style="background-color: rgb(93, 60, 129)">
+                                    TIPO DE COSTO
+                                </div>
+                                <div class="card-body">
+                                    <div class="chart">
+                                        <div class="chartjs-size-monitor">
+                                            <div class="chartjs-size-monitor-expand">
+                                                <div class="">
+                                                </div>
+                                            </div>
+                                            <div class="chartjs-size-monitor-shrink">
+                                                <div class="">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <canvas id="pieChartDI" style="height: 400px; min-height: 230px; display: block; width: 400px;" width="487" height="230" class="chartjs-render-monitor">
+                                        </canvas>
+                                    </div>
+                                </div>
+                                <!-- /.card-body -->
+                            </div>
                         </div>
                     </div>
-                    <div class="col-md-6">
-                        <div class="card">
-                            <div class="card-header text-center text-white badge-info" style="background-color: rgb(93, 60, 129)">
-                                TIPO DE COSTO
-                            </div>
-                            <div class="card-body">
-                                <div class="chart">
-                                    <div class="chartjs-size-monitor">
-                                        <div class="chartjs-size-monitor-expand">
-                                            <div class="">
-                                            </div>
-                                        </div>
-                                        <div class="chartjs-size-monitor-shrink">
-                                            <div class="">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <canvas id="pieChartDI" style="height: 400px; min-height: 230px; display: block; width: 400px;" width="487" height="230" class="chartjs-render-monitor">
-                                    </canvas>
-                                </div>
-                            </div>
-                            <!-- /.card-body -->
-                        </div>
+                    <div id="response-details" class="row" style="border-top: 0.5px solid rgb(93, 60, 129);overflow-x:auto"></div>
+                </div>
+                <div class="carousel-item" >
+                    <div class="table row m-auto" style="overflow-x:auto">
+                            <table id="trabajadores" class="table table-hover" style="border-top: 0.5px solid rgb(93, 60, 129)">
+                                    <thead>
+                                        <tr>
+                                            <td class="">#</td>
+                                            <td class="">Codigo</td>
+                                            <td class="">Nombres</td>
+                                            <td class="">Area</td>
+                                            <td class="">Hora y Fecha</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="response-workers">
+
+                                    </tbody>
+                            </table>
                     </div>
                 </div>
-                <div id="response-details" class="row" style="border-top: 0.5px solid rgb(93, 60, 129);overflow-x:auto"></div>
-            </div>
-            <div class="carousel-item">
-                <div class="table row m-auto" style="overflow-x:auto">
-                        <table id="trabajadores" class="table table-hover" style="border-top: 0.5px solid rgb(93, 60, 129)">
-                                <thead>
-                                    <tr>
-                                        <td class="">#</td>
-                                        <td class="">Codigo</td>
-                                        <td class="">Nombres</td>
-                                        <td class="">Area</td>
-                                        <td class="">Hora y Fecha</td>
-                                    </tr>
-                                </thead>
-                                <tbody id="response-workers">
-
-                                </tbody>
-                        </table>
-                </div>
-            </div>
-            <div class="carousel-item">
-                <div class="row">
-                    <div class="bd-highlight col-md-2" data-step="2" data-intro="este es el filtro por empleado, activa el switch y escribe el codigo.">
-                        <div class="custom-control custom-switch">
-                            <input type="checkbox" class="custom-control-input" id="customSwitch1">
-                            <label class="custom-control-label" for="customSwitch1">Empleado</label>
-                          </div>
-                        <input id="codeOrdni" name="code" type="text" class="form-control" value="0" readonly>
-
-                    </div>
-                        @php
-                        $config = Auth::user()->getConfig();
-                        @endphp
-                        @if(count($config['sedes']) > 0)
-                        <div class="bd-highlight col-md-2" hidden>
-                            <small>Sedes</small>
-                            <select name="sede" id="sede" class="form-control">
-                            <option value="0" selected>Todas las sedes</option>
-
-                                @foreach (App\Sedes::all() as $item)
-                                    @if(in_array($item->id,$config['sedes']))
-                                        <option value="{{ $item->id }}" >{{ $item->name }}</option>
-                                    @endif
-                                @endforeach
-                            </select>
-                        </div>
-                        @endif
-                        <div class="bd-highlight col-md-2">
-                            <small>Areas</small>
-                            <select name="area" id="area" class="form-control">
-                                <option value="0" selected>Todas las areas</option>
-                                @foreach (App\Area::all() as $item)
-                                    @if (in_array($item->id,$config["areas"]))
-                                        <option value="{{ $item->id }}">{{ $item->area }}</option>
-                                    @endif
-                                @endforeach
-                            </select>
-                    </div>
-                        <div class="bd-highlight col-md-2">
-                            <small>Turno</small>
-                              <select class="form-control" name="turno" id="turno">
-
-                                  <option value="0">Todos</option>
-                                  @php
-                                        $time =Carbon\ Carbon::now()->timezone('America/Lima');
-                                        $morning = Carbon\Carbon::create($time->year, $time->month, $time->day, 4, 0, 0); //set time to 04:00 : 4AM
-                                        $evening = Carbon\Carbon::create($time->year, $time->month, $time->day, 14, 0, 0); //set time to 14:00 : 2PM
-                                  @endphp
-
-                                  @if($time->between($morning, $evening, true))
-                                  <option selected>DIA</option>
-                                  <option>NOCHE</option>
-                                  @else
-                                  <option>DIA</option>
-                                  <option selected>NOCHE</option>
-                                  @endif
-
-                                  <option>S/T</option>
-
-                              </select>
-                    </div>
-                        <div class="bd-highlight col-md-1">
-                            <br>
+                <div class="carousel-item" >
+                    <div class="row">
+                        <div class="bd-highlight col-md-2" data-step="2" data-intro="este es el filtro por empleado, activa el switch y escribe el codigo.">
                             <div class="custom-control custom-switch">
-                                <input type="checkbox" class="custom-control-input" id="switch_check">
-                                    <label class="custom-control-label" for="switch_check">S/V</label>
+                                <input type="checkbox" class="custom-control-input" id="customSwitch1">
+                                <label class="custom-control-label" for="customSwitch1">Empleado</label>
                             </div>
-                    </div>
-                        <div class="bd-highlight col-md-1" data-step="4" data-intro="una vez elegido los filtros , hacer click aqui para mostrar los resultados">
-                            <!--<br>-->
-                            <a href="javascript:search(null)" class="btn btn-primary  m-1 btn-sm btn-block">Buscar</a>
+                            <input id="codeOrdni" name="code" type="text" class="form-control" value="0" readonly>
+
                         </div>
-                        <div class="bd-highlight col-md-2" data-step="5" data-intro="y con este boton generaras un archivo excel con los resultados mas detallados y mejorado.">
-                            <!--<br>-->
-                            <form action="{{ route('xlsx.getAssisXlsx') }}" method="post">
-                                {{ csrf_field() }}
-                                <input type="hidden" id="start" name="start" value="{{ date('Y-m-d') }}">
-                                <input type="hidden" id="end" name="end" value="{{ date('Y-m-d') }}">
-                                <input type="hidden" id="sedes" name="sedes" value="0">
-                                <input type="hidden" id="areas" name="areas" value="0">
-                                <input type="hidden" id="turnos" name="turnos" value="0">
-                                <button type="submit" class="btn btn-success  m-1 btn-sm btn-block">Exportar [Resumen]</button>
-                            </form>
+                            @php
+                            $config = Auth::user()->getConfig();
+                            @endphp
+                            @if(count($config['sedes']) > 0)
+                            <div class="bd-highlight col-md-2" hidden>
+                                <small>Sedes</small>
+                                <select name="sede" id="sede" class="form-control">
+                                <option value="0" selected>Todas las sedes</option>
+
+                                    @foreach (App\Models\Sedes::all() as $item)
+                                        @if(in_array($item->id,$config['sedes']))
+                                            <option value="{{ $item->id }}" >{{ $item->name }}</option>
+                                        @endif
+                                    @endforeach
+                                </select>
+                            </div>
+                            @endif
+                            <div class="bd-highlight col-md-2">
+                                <small>Areas</small>
+                                <select name="area" id="area" class="form-control">
+                                    <option value="0" selected>Todas las areas</option>
+                                    @foreach (App\Models\Area::all() as $item)
+                                        @if (in_array($item->id,$config["areas"]))
+                                            <option value="{{ $item->id }}">{{ $item->area }}</option>
+                                        @endif
+                                    @endforeach
+                                </select>
                         </div>
-                        <div class="bd-highlight col-md-2">
-                            <!--<br>-->
-                            <form action="{{ route('xlsx.getAssisXlsxRRHH') }}" method="post">
-                                {{ csrf_field() }}
-                                <input type="hidden" id="start" name="start" value="{{ date('Y-m-d') }}">
-                                <input type="hidden" id="end" name="end" value="{{ date('Y-m-d') }}">
-                                <input type="hidden" id="sedes" name="sedes" value="0">
-                                <input type="hidden" id="areas" name="areas" value="0">
-                                <input type="hidden" id="turnos" name="turnos" value="0">
-                                <button type="submit" class="btn btn-success m-1 btn-sm btn-block">Exportar [RR.HH]</button>
-                            </form>
+                            <div class="bd-highlight col-md-2">
+                                <small>Turno</small>
+                                <select class="form-control" name="turno" id="turno">
+
+                                    <option value="0">Todos</option>
+                                    @php
+                                            $time = Carbon\Carbon::now()->timezone('America/Lima');
+                                            $morning = Carbon\Carbon::create($time->year, $time->month, $time->day, 4, 0, 0); //set time to 04:00 : 4AM
+                                            $evening = Carbon\Carbon::create($time->year, $time->month, $time->day, 14, 0, 0); //set time to 14:00 : 2PM
+                                    @endphp
+
+                                    @if($time->between($morning, $evening, true))
+                                    <option selected>DIA</option>
+                                    <option>NOCHE</option>
+                                    @else
+                                    <option>DIA</option>
+                                    <option selected>NOCHE</option>
+                                    @endif
+
+                                    <option>S/T</option>
+
+                                </select>
+                        </div>
+                            <div class="bd-highlight col-md-1">
+                                <br>
+                                <div class="custom-control custom-switch">
+                                    <input type="checkbox" class="custom-control-input" id="switch_check">
+                                        <label class="custom-control-label" for="switch_check">S/V</label>
+                                </div>
+                        </div>
+                            <div class="bd-highlight col-md-1" data-step="4" data-intro="una vez elegido los filtros , hacer click aqui para mostrar los resultados">
+                                <!--<br>-->
+                                <a href="javascript:search(null)" class="btn btn-primary  m-1 btn-sm btn-block">Buscar</a>
+                            </div>
+                            <div class="bd-highlight col-md-2" data-step="5" data-intro="y con este boton generaras un archivo excel con los resultados mas detallados y mejorado.">
+                                <!--<br>-->
+                                <form action="{{ route('xlsx.getAssisXlsx') }}" method="post">
+                                    {{ csrf_field() }}
+                                    <input type="hidden" id="start" name="start" value="{{ date('Y-m-d') }}">
+                                    <input type="hidden" id="end" name="end" value="{{ date('Y-m-d') }}">
+                                    <input type="hidden" id="sedes" name="sedes" value="0">
+                                    <input type="hidden" id="areas" name="areas" value="0">
+                                    <input type="hidden" id="turnos" name="turnos" value="0">
+                                    <button type="submit" class="btn btn-success  m-1 btn-sm btn-block">Exportar [Resumen]</button>
+                                </form>
+                            </div>
+                            <div class="bd-highlight col-md-2">
+                                <!--<br>-->
+                                <form action="{{ route('xlsx.getAssisXlsxRRHH') }}" method="post">
+                                    {{ csrf_field() }}
+                                    <input type="hidden" id="start" name="start" value="{{ date('Y-m-d') }}">
+                                    <input type="hidden" id="end" name="end" value="{{ date('Y-m-d') }}">
+                                    <input type="hidden" id="sedes" name="sedes" value="0">
+                                    <input type="hidden" id="areas" name="areas" value="0">
+                                    <input type="hidden" id="turnos" name="turnos" value="0">
+                                    <button type="submit" class="btn btn-success m-1 btn-sm btn-block">Exportar [RR.HH]</button>
+                                </form>
+                        </div>
                     </div>
-                </div>
-                <div class="row m-auto mb-1" style="overflow-x:auto">
-                    <div class="table">
-                        <table class="table table-bordered" id="result">
-                        </table>
+                    <div class="row m-auto mb-1" style="overflow-x:auto">
+                        <div class="table">
+                            <table class="table table-bordered" id="result">
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
 
         </div>
-</div>
+{{-- </div> --}}
 @endsection
 
 {{-- @section('plugins.Chartjs', true) --}}
@@ -381,7 +383,7 @@
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@0.7.0"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+{{-- <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script> --}}
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
 <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/jszip-2.5.0/dt-1.10.21/af-2.3.5/b-1.6.2/b-colvis-1.6.2/b-flash-1.6.2/b-html5-1.6.2/b-print-1.6.2/cr-1.5.2/fc-3.3.1/fh-3.1.7/kt-2.5.2/r-2.2.5/rg-1.1.2/rr-1.2.7/sc-2.0.2/sp-1.1.1/sl-1.3.1/datatables.min.js"></script>
@@ -417,7 +419,10 @@
     $(document).ready(function(){
         //asistencias/inasistencia/permisos data;
         // $('.carousel').carousel('pause');
-
+        $('.carousel').carousel({
+            pause: true,
+            interval: false,
+        });
         pieChartData = {
             labels: ['DESTAJEROS','JORNALES'],
                 datasets: [
@@ -521,9 +526,13 @@
     $('#sedes').change(function(e){
         loadGraphics(start_date,end_date);
     });
-    
+
     $('#cultivo').change(function(e){
         loadGraphics(start_date,end_date);
+    });
+
+    $('#reporteCarousel').click(function(e){
+        $('.carousel').carousel(2);
     });
 
     var contador = 0;
@@ -976,7 +985,7 @@
                             dataTableL.fixedHeader.disable();
                             // new $.fn.dataTable.FixedHeader( dataTable );
                         }
-        
+
                     },
                     error:function(response){
                         console.log(response);
@@ -984,7 +993,7 @@
             });
             //go to slide div
     }
-    
+
     function listWorkersbyArea(id_area,type){
         var id_sede = $('#sede').val();
         var proceso = $('#cultivo').val();
@@ -1035,7 +1044,7 @@
                             dataTableL.fixedHeader.disable();
                             // new $.fn.dataTable.FixedHeader( dataTable );
                         }
-        
+
                     }
             });
     }

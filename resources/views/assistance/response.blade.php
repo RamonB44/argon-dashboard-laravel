@@ -9,7 +9,7 @@
         </thead>
         <tbody>
             @php
-                
+
                 $fecha1 = Carbon\Carbon::parse($start_date);
                 $fecha2 = Carbon\Carbon::parse($end_date);
                 $diff = $fecha1->diff($fecha2);
@@ -39,16 +39,16 @@
                     @php
                         $fecha1 = Carbon\Carbon::parse($start_date);
                         $current = $fecha1->addDays($i);
-                        
+
                         if($turno==0 || $turno == "DIA" || $turno == "NOCHE"){
-                            $asistencia = App\Asistencia::whereDate('created_at', '=',$current->format('Y-m-d'))
+                            $asistencia = App\Models\Asistencia::whereDate('created_at', '=',$current->format('Y-m-d'))
                             ->where('id_employe','=',$value['Employe_ID'])
                             ->when($salida,function ($query){
                                 return $query->where('id_aux_treg',10);
                             })
                             ->get();
                             if(count($asistencia)<=0){
-                                $asistencia = App\Asistencia::where('id_employe','=',$value['Employe_ID'])
+                                $asistencia = App\Models\Asistencia::where('id_employe','=',$value['Employe_ID'])
                                 ->when($salida,function ($query){
                                     return $query->where('id_aux_treg',10);
                                 }, function ($query) use ($current){
@@ -59,7 +59,7 @@
                             }
                         }
                         if($turno == "S/T"){
-                            $asistencia = App\Asistencia::where('id_employe','=',$value['Employe_ID'])
+                            $asistencia = App\Models\Asistencia::where('id_employe','=',$value['Employe_ID'])
                             ->when($salida,function ($query){
                                 return $query->where('id_aux_treg',10);
                             }, function ($query) use ($current){
@@ -84,7 +84,7 @@
                                             if($v->created_at && $v->deleted_at){
                                                 $entry = \Carbon\Carbon::parse($v->created_at);// hora de ingreso 18:00:00
                                                 $beat = \Carbon\Carbon::parse($v->deleted_at);// hora de salida 02:00:00
-                                                
+
                                                 $mins = $entry->diffInMinutes($beat, true);
                                                 // $horas = $ingreso->diffinHours($salida);
                                                 $horas = $mins/60;
@@ -156,7 +156,7 @@
                     <p >Registros: {{ $registros }}</p>
                     <p>Verificados: {{ $cont_checked }}</p>
                     <p>S/Verificar: {{ $cont_unchecked }}</p>
-                    <p>Por Contratar: {{App\Asistencia::whereNull('id_employe')->whereBetween(\DB::raw('UNIX_TIMESTAMP(DATE_FORMAT(created_at, "%Y-%m-%d %H:%i"))'), [strtotime($fecha1->format('Y-m-d H:i')), strtotime($fecha2->addHours(23)->addMinutes(59)->format('Y-m-d H:i'))])
+                    <p>Por Contratar: {{App\Models\Asistencia::whereNull('id_employe')->whereBetween(\DB::raw('UNIX_TIMESTAMP(DATE_FORMAT(created_at, "%Y-%m-%d %H:%i"))'), [strtotime($fecha1->format('Y-m-d H:i')), strtotime($fecha2->addHours(23)->addMinutes(59)->format('Y-m-d H:i'))])
                     ->select('*')->count() }}</p>
                 </td>
             </tr>
