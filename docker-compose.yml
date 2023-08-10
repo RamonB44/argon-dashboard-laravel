@@ -1,0 +1,36 @@
+version: "3.8"
+services:
+  app:
+    build:
+      args:
+        user: lordhunter
+        uid: 1000
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      - WPN_WAIT_UNTIL=60
+      - VIRTUAL_PORT=9000
+      - VIRTUAL_HOST=asistencia-app.ramonb44.dev
+      - LETSENCRYPT_HOST=asistencia-app.ramonb44.dev
+      - VIRTUAL_ROOT=/home/lordhunter/asistencia/public
+      - SERVICE_NAME=asistencia-app
+      - SERVICE_TAGS=dev
+    image: asistencia
+    container_name: asistencia-app
+    restart: unless-stopped
+    working_dir: /home/lordhunter/asistencia
+    volumes:
+      - ./:/home/lordhunter/asistencia
+      #- /home/lordunter/destajo-master:/home/lordhunter/destajo-master
+    networks:
+      - proxy
+
+volumes:
+  app-root:
+    name: nginx_app-root
+    external: true
+
+networks:
+  proxy:
+    external: true
+    name: proxy
